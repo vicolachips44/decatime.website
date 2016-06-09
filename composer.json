@@ -1,0 +1,32 @@
+{
+    "name": "decatime/website",
+    "description": "Decatime website source code",
+    "keywords": ["website", "blog", "computing"],
+    "homepage": "http://www.decatime.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Victor Garnier",
+            "email": "vga.nantes@gmail.com",
+            "homepage": "http://www.decatime.org/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "twig/twig": "~1.0",
+        "monolog/monolog": "^1.17",
+        "slim/twig-view": "^2.1",
+        "akrabat/rka-slim-session-middleware": "^2.0",
+        "doctrine/orm": "2.5.*",
+        "vlucas/phpdotenv": "^2.2"
+    },
+    "require-dev": {
+      "symfony/dom-crawler": "^3.1",
+      "symfony/css-selector": "^3.1"
+    }
+  ,  "minimum-stability": "RC",
+    "autoload": {
+        "psr-4": { "": "src/", "Config\\": "config/" }
+    }
+}

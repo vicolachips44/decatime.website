@@ -1,0 +1,12 @@
+/node_modules/
+/vendor/
+/logs/
+!/logs/.gitkeep
+/cache/
+/build/
+/config/.env
+/public/_static/
+!/public/_static/.gitkeep
+/public/fonts/
+/public/vendor/
+

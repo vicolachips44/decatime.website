@@ -1,0 +1,29 @@
+<nav class="navbar nabar-default navbar-static-top navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed"
+        data-toggle="collapse"
+        data-target="#website-navbar-item"
+        aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img alt="IT'S DECATIME!" src="/assets/images/logo_web.png"/>
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="website-navbar-item">
+      <p class="navbar-text navbar-right">
+        {% if not adminSession %}
+        <a data-bind="click: onPrivateLinkClick" href="#">Espace privé</a>
+        {% else %}
+        <a data-bind="click: onPrivateLogoutClick" href="#">Déconnecter</a>
+        {% endif %}
+        &nbsp;
+      </p>
+    </div>
+  </div>
+</nav>

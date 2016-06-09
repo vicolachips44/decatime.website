@@ -1,0 +1,34 @@
+<!doctype HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta name="description" content="{% block page_description %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if debug_mode %}
+    <!-- @todo: add other links to css for dev env -->
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="/css/bootstrap-override.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    {% else %}
+    <link rel="stylesheet" href="/_static/style.min.css" />
+    {% endif %}
+  </head>
+  <body data-debug-mode="{{ debug_mode }}" data-admin-session="{{ adminSession }}">
+    {% include 'base/navbar.html.twig' %}
+    {% block body_content %}
+    {% endblock %}
+    {% block modal_dialogs %}
+    {% include 'modal/private-area-login.html.twig' %}
+    {% endblock %}
+
+    {% if debug_mode %}
+    <script src="/js/bootloader.js"></script>
+    {% else %}
+    <script src="/_static/app.min.js"></script>:
+    {% endif %}
+  </body>
+</html>
+
