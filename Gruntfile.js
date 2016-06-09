@@ -35,14 +35,12 @@ module.exports = function(grunt) {
     },
     copy: {
       main: {
-        files: [
-         {
-           expand: true,
-           flatten: true,
-           src: 'public/vendor/bootstrap/dist/fonts/*',
-           dest: 'public/fonts'
-         }
-        ]
+        files: [{
+          expand: true,
+          flatten: true,
+          src: 'public/vendor/bootstrap/dist/fonts/*',
+          dest: 'public/fonts'
+        }]
       }
     },
     watch: {
@@ -60,4 +58,4 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['requirejs', 'cssmin', 'copy']);
-}
+};

@@ -5,7 +5,7 @@
 ### The environment configuration file
 
 The configuration variables relay on phpdotenv package.
-you must create a *.env* file insite config folder and put lines located
+you must create a *.env* file inside config folder and put lines located
 in *.env.example*
 
 ### Initialisation of the project
