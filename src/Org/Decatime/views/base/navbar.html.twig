@@ -1,4 +1,4 @@
-<nav class="navbar nabar-default navbar-static-top navbar-inverse">
+<nav class="navbar navbar-custom nabar-default navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed"
@@ -17,12 +17,24 @@
 
     <div class="collapse navbar-collapse" id="website-navbar-item">
       <p class="navbar-text navbar-right">
-        {% if not adminSession %}
-        <a data-bind="click: onPrivateLinkClick" href="#">Espace privé</a>
-        {% else %}
-        <a data-bind="click: onPrivateLogoutClick" href="#">Déconnecter</a>
-        {% endif %}
-        &nbsp;
+      {% if not adminSession %}
+        <button
+          data-bind="click: onPrivateLinkClick"
+          type="button"
+          class="btn btn-default navbar-btn">
+          <span class="glyphicon glyphicon-user"></span>
+          Administration
+        </button>
+      {% else %}
+        <button
+          data-bind="click: onPrivateLogoutClick"
+          type="button"
+          class="btn btn-default navbar-btn">
+          <span class="glyphicon glyphicon-off"></span>
+            Déconnexion
+        </button>
+      {% endif %}
+      &nbsp;
       </p>
     </div>
   </div>

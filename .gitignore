@@ -9,4 +9,5 @@
 !/public/_static/.gitkeep
 /public/fonts/
 /public/vendor/
-
+dbsite.sdb3
+/_private/

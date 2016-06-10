@@ -24,9 +24,9 @@ function($, ko, BaseCtrl) {
     }
   };
 
-  PrivateArea.prototype.onValidateClick = function() {
+  PrivateArea.prototype.onValidateClick = function(data, event) {
     var self = this;
-
+    var target = $(event.currentTarget).data('uri-target');
     $.ajax({
       url: this.selector.find('form').first().data('endpoint'),
       type: 'POST',
@@ -34,7 +34,7 @@ function($, ko, BaseCtrl) {
       success: function(resp) {
         self.selector.modal('hide');
         if (resp.status === 'OK') {
-          window.location.reload();
+          window.location = target;
         }
       }
     });

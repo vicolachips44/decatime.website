@@ -1,0 +1,3 @@
+#!/bin/sh
+
+vendor/bin/doctrine orm:generate:entities src/ --no-backup

@@ -21,7 +21,13 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bind="click: onValidateClick">Valider</button>
+        <button
+          data-uri-target="{{ path_for('private_admin') }}"
+          type="button"
+          class="btn btn-primary"
+          data-bind="click: onValidateClick">
+            Valider
+          </button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
       </div>
     </div>
