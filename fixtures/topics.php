@@ -1,26 +1,20 @@
 <?php
+use \Org\Decatime\Entity\Topic as Topic;
 
 //cleanup
 cleanUp('\Org\Decatime\Entity\Topic', $ema);
 
-$ema->persist(createTopic('JavaScript'));
-$ema->persist(createTopic('HTML5'));
-$ema->persist(createTopic('css'));
-$ema->persist(createTopic('PHP'));
-$ema->persist(createTopic('Database'));
-$ema->persist(createTopic('SQL'));
-$ema->persist(createTopic('NoSQL'));
-$ema->persist(createTopic('Linux'));
-$ema->persist(createTopic('Ubuntu'));
-$ema->persist(createTopic('Debian'));
-$ema->persist(createTopic('Bash'));
-$ema->persist(createTopic('Shell'));
+$ema->persist(new Topic(1, 'JavaScript'));
+$ema->persist(new Topic(2, 'HTML5'));
+$ema->persist(new Topic(3, 'CSS'));
+$ema->persist(new Topic(4, 'PHP'));
+$ema->persist(new Topic(5, 'Database'));
+$ema->persist(new Topic(6, 'SQL'));
+$ema->persist(new Topic(7, 'NoSQL'));
+$ema->persist(new Topic(8, 'Linux'));
+$ema->persist(new Topic(9, 'Ubuntu'));
+$ema->persist(new Topic(10, 'Debian'));
+$ema->persist(new Topic(11, 'Bash'));
+$ema->persist(new Topic(12, 'Shell'));
 
 $ema->flush();
-
-function createTopic($name)
-{
-    $topic = new \Org\Decatime\Entity\Topic();
-    $topic->setName($name);
-    return $topic;
-}
