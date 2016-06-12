@@ -64,9 +64,9 @@ $chapter1 = addChapter($ema, $article1, "Introduction", 1, [
                 'data' => "Aenean eget scelerisque leo, vel efficitur nunc. Mauris eu felis nisi. In non lorem justo. Nulla congue eget nibh congue ornare. Vivamus et felis pellentesque, elementum eros ut, placerat lacus. Morbi tincidunt condimentum augue, eget viverra dolor sodales sit amet. Suspendisse aliquam interdum arcu et faucibus.",
             ],
             [
-                'type' => ContentType::T_TEXT,
-                'format' => Format::F_TEXT,
-                'data' => "Cras mollis odio sed ex porttitor rhoncus. Aenean lacinia at tortor quis dignissim. Aliquam quis arcu vitae quam molestie commodo id at nisl. Sed pretium dui diam, non egestas elit convallis at. Sed condimentum diam massa, a pretium neque aliquet et. Duis ut metus ligula. Duis consequat, mi non pellentesque iaculis, ipsum enim finibus justo, at molestie metus ipsum nec urna.",
+                'type' => ContentType::T_CODE,
+                'format' => Format::F_PHP,
+                'data' => '<?php'
             ],
             [
                 'type' => ContentType::T_TEXT,

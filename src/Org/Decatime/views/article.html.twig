@@ -1,0 +1,22 @@
+{% extends "base/main.html.twig" %}
+
+{% block page_title %}{{ article.getTitle() }}{% endblock %}
+{% block body_content %}
+<div class="container-fluid">
+  <h2>{{ article.getTitle() }}</h2>
+  {% for chapter in article.getChapters() %}
+  <h3>{{ chapter.getTitle() }}</h3>
+  {% for content in chapter.getContents() %}
+  <h4>{{ content.getTitle() }}</h4>
+  {% for paragraph in content.getParagraphs() %}
+  {% if paragraph.getType().getId() == 4 %}
+  <pre><code class="language-{{ paragraph.getFormat().getName() }}">{{ paragraph.getData }}</code></pre>
+  {% endif %}
+  {% if paragraph.getType().getId() == 1 %}
+  <p>{{ paragraph.getData() }}</p>
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+  {% endfor %}
+</div>
+{% endblock %}

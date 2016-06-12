@@ -24,4 +24,22 @@ class HomeController extends AbstractController
             ]
         );
     }
+
+    /**
+     * viewArticleAction handler.
+     *
+     * {@inheritdoc}
+     */
+    public function viewArticleAction(Request $request, Response $response, array $args)
+    {
+        $artRepo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+        $article = $artRepo->find($args['id']);
+        return $this->render(
+            $response,
+            'article.html.twig',
+            [
+                'article' => $article
+            ]
+        );
+    }
 }

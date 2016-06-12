@@ -29,7 +29,7 @@ trait Settings
                         'driver' => getenv('DB_DRIVER'),
                         'user' => getenv('DB_USER'),
                         'password' => getenv('DB_PWD'),
-                        'path' => getenv('DB_PATH')
+                        'path' => __DIR__.'/../'.getenv('DB_PATH')
                     ]
                 ]
             ],
