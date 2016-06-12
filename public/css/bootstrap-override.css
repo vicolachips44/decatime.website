@@ -4,17 +4,12 @@
     height: 76px;
 }
 
-.navbar {min-height: 76px !important; }
+.navbar {min-height: 76px !important; border: 1px gray solid; }
 
 .navbar-custom {
-  background-color: #494748;
-  border-color: #383737;
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#636062), to(#494748));
-  background-image: -webkit-linear-gradient(top, #636062, 0%, #494748, 100%);
-  background-image: -moz-linear-gradient(top, #636062 0%, #494748 100%);
-  background-image: linear-gradient(to bottom, #636062 0%, #494748 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff636062', endColorstr='#ff494748', GradientType=0);
+  background-color: #4E4F51;
+  border-bottom: 2px black solid;
+  padding: 0px;
 }
 .navbar-custom .navbar-brand {
   color: #ffffff;
@@ -25,19 +20,25 @@
   background-color: transparent;
 }
 .navbar-custom .navbar-text {
-  color: #ffffff;
+  color: yellow;
 }
-.navbar-custom .navbar-nav > li:last-child > a {
-  border-right: 1px solid #383737;
+.navbar-custom .navbar-nav > li {
+    padding-top: 28px;
+    height: 32px;
+    font-family: 'Indie Flower';
+    color: black;
 }
 .navbar-custom .navbar-nav > li > a {
-  color: #ffffff;
-  border-left: 1px solid #383737;
+    color: white;
+    font-size: 22px;
+    font-weight: bolder;
+    height: 30px;
 }
 .navbar-custom .navbar-nav > li > a:hover,
 .navbar-custom .navbar-nav > li > a:focus {
-  color: #c0c0c0;
+  color: #cc9999;
   background-color: transparent;
+  border-bottom: 2px yellow dashed;
 }
 .navbar-custom .navbar-nav > .active > a,
 .navbar-custom .navbar-nav > .active > a:hover,

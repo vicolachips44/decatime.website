@@ -5,7 +5,7 @@ namespace Org\Decatime\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Org\Decatime\Repository\ArticleRepository")
  * @ORM\Table
  */
 class Article
@@ -74,6 +74,17 @@ class Article
     {
         $this->chapters = new \Doctrine\Common\Collections\ArrayCollection();
         $this->articleTopics = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getKeywords()
+    {
+        $keywords = [];
+        foreach ($this->chapters as $chapter) {
+            foreach ($chapter->getContents() as $content) {
+                $keywords[] = $content->getKeywords();
+            }
+        }
+        return implode(',', $keywords);
     }
 
     /**

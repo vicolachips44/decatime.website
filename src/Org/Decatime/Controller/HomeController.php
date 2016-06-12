@@ -6,6 +6,8 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use Monolog\Logger;
 
+use Org\Decatime\Adapter\ArticleAdapter;
+
 class HomeController extends AbstractController
 {
     /**
@@ -20,7 +22,7 @@ class HomeController extends AbstractController
             $response,
             'index.html.twig',
             [
-                'page_title' => 'welcome'
+                'page_title' => 'Decatime - home'
             ]
         );
     }
@@ -32,8 +34,10 @@ class HomeController extends AbstractController
      */
     public function viewArticleAction(Request $request, Response $response, array $args)
     {
-        $artRepo = $this->ema->getRepository('Org\Decatime\Entity\Article');
-        $article = $artRepo->find($args['id']);
+        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+
+        $article = $repo->loadArticle($args['id']);
+
         return $this->render(
             $response,
             'article.html.twig',

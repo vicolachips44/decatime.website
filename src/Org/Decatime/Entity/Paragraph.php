@@ -97,6 +97,11 @@ class Paragraph
         return $this->rawData;
     }
 
+    public function getEncodedRawData()
+    {
+        return base64_encode(stream_get_contents($this->rawData));
+    }
+
     /**
      * Set data
      *

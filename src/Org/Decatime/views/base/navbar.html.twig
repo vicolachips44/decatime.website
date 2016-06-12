@@ -1,5 +1,5 @@
-<nav class="navbar navbar-custom nabar-default navbar-static-top navbar-inverse">
-  <div class="container-fluid">
+<nav class="navbar navbar-custom nabar-default navbar-static-top">
+  <div class="container-fluid" style="padding: 4px">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed"
         data-toggle="collapse"
@@ -11,17 +11,23 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <img alt="IT'S DECATIME!" src="/assets/images/logo_web.png"/>
+        <img src="/assets/images/logo_web.png"/>
       </a>
     </div>
 
-    <div class="collapse navbar-collapse" id="website-navbar-item">
-      <p class="navbar-text navbar-right">
+    <div class="collapse navbar-collapse" id="website-navbar-item" style="background-image: url('/assets/images/banner.png')">
+      <p class="navbar-text decatime-title">Decatime programing blog!</p>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Php</a></li>
+        <li><a href="#">Javascript</a></li>
+        <li><a href="#">HTML & CSS</a></li>
+      </ul>
+      <p class="navbar-text navbar-right" style="margin-right: 4px">
       {% if not adminSession %}
         <button
           data-bind="click: onPrivateLinkClick"
           type="button"
-          class="btn btn-default navbar-btn">
+          class="btn btn-success navbar-btn">
           <span class="glyphicon glyphicon-user"></span>
           Administration
         </button>

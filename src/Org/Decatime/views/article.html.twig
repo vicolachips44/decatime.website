@@ -1,8 +1,13 @@
 {% extends "base/main.html.twig" %}
 
 {% block page_title %}{{ article.getTitle() }}{% endblock %}
+{% block page_keywords %}{{ article.getKeywords() }}{% endblock %}
+{% block page_description %}{{ article.getShortDescription() }}{% endblock %}
 {% block body_content %}
 <div class="container-fluid">
+  {% if article is null %}
+  <h3>Cet article n'existe pas encore!</h3>
+  {% endif %}
   <h2>{{ article.getTitle() }}</h2>
   {% for chapter in article.getChapters() %}
   <h3>{{ chapter.getTitle() }}</h3>
@@ -13,7 +18,10 @@
   <pre><code class="language-{{ paragraph.getFormat().getName() }}">{{ paragraph.getData }}</code></pre>
   {% endif %}
   {% if paragraph.getType().getId() == 1 %}
-  <p>{{ paragraph.getData() }}</p>
+  <p>{{ paragraph.getData()|raw }}</p>
+  {% endif %}
+  {% if paragraph.getType().getId() == 2 %}
+  <p align="center"><img src="data:image/png;base64,{{ paragraph.getEncodedRawData() }}" alt="image"/></p>
   {% endif %}
   {% endfor %}
   {% endfor %}

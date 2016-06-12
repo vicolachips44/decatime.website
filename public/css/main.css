@@ -1,0 +1,42 @@
+.decatime-title {
+    font-family: 'Indie Flower';
+    font-weight: 400;
+    font-size: 32px;
+}
+h2 {
+    font-family: 'Monda';
+    font-weight: 400;
+    font-size: 40px;
+    border-bottom: 1px black solid;
+    text-align: center;
+}
+h3 {
+    display: block;
+    font-family: 'Monda';
+    font-weight: 400;
+    font-size: 30px;
+}
+h3:before {
+    font-family: "FontAwesome";
+    content: "\f0a4";
+}
+h4 {
+    font-family: 'Monda';
+    font-weight: 300;
+    font-size: 22px;
+}
+h4:before {
+    font-family: "FontAwesome";
+    content: "\f138";
+    padding-right: 12px;
+}
+p {
+    font-family: "Geneva Sans-serif";
+    font-size: 1.2em;
+    line-height: 1.25em;
+    margin: 0.625em;
+    text-align: justify;
+}
+p + p {
+    text-indent: 1em;
+}

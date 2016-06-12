@@ -39,23 +39,28 @@ $chapter1 = addChapter($ema, $article1, "Introduction", 1, [
             [
                 'type' => ContentType::T_TEXT,
                 'format' => Format::F_TEXT,
-                'data' => 'Ceci est un autre bout de paragraphe sans intérêt...',
+                'data' => 'Ceci est un <b>autre</b> bout de paragraphe sans intérêt...',
             ],
             [
                 'type' => ContentType::T_TEXT,
                 'format' => Format::F_TEXT,
-                'data' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum porttitor ex enim, at mattis diam accumsan eget. Mauris at augue magna. Phasellus tempor, neque at imperdiet venenatis, ex elit scelerisque felis, non mattis orci metus ut dui. Vivamus dictum urna ut quam ornare, quis commodo mi interdum. Pellentesque cursus posuere tortor sed mollis. Integer placerat hendrerit tincidunt. Duis ultrices nisi nibh, sit amet commodo diam rhoncus ac. Donec et pellentesque ex. Integer commodo elementum dolor a vulputate. Fusce posuere, mauris quis sagittis ullamcorper, ex mi ullamcorper enim, sagittis fringilla felis dui non sem. Nulla sodales tincidunt quam ac aliquam. Donec ut augue est. Proin eu enim lectus."
+                'data' => "Lorem ipsum dolor sit amet, <i>consectetur adipiscing elit</i>. Vestibulum porttitor ex enim, at mattis diam accumsan eget. Mauris at augue magna. Phasellus tempor, neque at imperdiet venenatis, ex elit scelerisque felis, non mattis orci metus ut dui. Vivamus dictum urna ut quam ornare, quis commodo mi interdum. Pellentesque cursus posuere tortor sed mollis. Integer placerat hendrerit tincidunt. Duis ultrices nisi nibh, sit amet commodo diam rhoncus ac. Donec et pellentesque ex. Integer commodo elementum dolor a vulputate. Fusce posuere, mauris quis sagittis ullamcorper, ex mi ullamcorper enim, sagittis fringilla felis dui non sem. Nulla sodales tincidunt quam ac aliquam. Donec ut augue est. Proin eu enim lectus."
             ],
             [
                 'type' => ContentType::T_TEXT,
                 'format' => Format::F_TEXT,
                 'data' => 'Ceci est un autre bout de paragraphe sans intérêt 2...',
+            ],
+            [
+                'type' => ContentType::T_IMAGE,
+                'format' => Format::F_PNG,
+                'rawData' => __DIR__ .'/../public/assets/images/logo_web.png'
             ]
         ]
     ],
     [
         'title' => "Qui utilise nodeJS",
-        'keywords'=> "key1, key2, key3",
+        'keywords'=> "key4, key6, key12",
         'paragraphs' =>
         [
             [
@@ -66,7 +71,7 @@ $chapter1 = addChapter($ema, $article1, "Introduction", 1, [
             [
                 'type' => ContentType::T_CODE,
                 'format' => Format::F_PHP,
-                'data' => '<?php'
+                'data' => file_get_contents(__DIR__.'/phpClass.php')
             ],
             [
                 'type' => ContentType::T_TEXT,
@@ -74,9 +79,9 @@ $chapter1 = addChapter($ema, $article1, "Introduction", 1, [
                 'data' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum porttitor ex enim, at mattis diam accumsan eget. Mauris at augue magna. Phasellus tempor, neque at imperdiet venenatis, ex elit scelerisque felis, non mattis orci metus ut dui. Vivamus dictum urna ut quam ornare, quis commodo mi interdum. Pellentesque cursus posuere tortor sed mollis. Integer placerat hendrerit tincidunt. Duis ultrices nisi nibh, sit amet commodo diam rhoncus ac. Donec et pellentesque ex. Integer commodo elementum dolor a vulputate. Fusce posuere, mauris quis sagittis ullamcorper, ex mi ullamcorper enim, sagittis fringilla felis dui non sem. Nulla sodales tincidunt quam ac aliquam. Donec ut augue est. Proin eu enim lectus."
             ],
             [
-                'type' => ContentType::T_TEXT,
-                'format' => Format::F_TEXT,
-                'data' => "Suspendisse consequat ligula eu lectus elementum, quis congue mauris posuere. Mauris maximus viverra massa, sit amet facilisis ligula commodo a. Suspendisse commodo consequat neque, at iaculis mi congue sed. Sed elit urna, feugiat eu purus vitae, placerat placerat eros. Vivamus tincidunt mauris at diam efficitur, sit amet pulvinar tortor cursus. Maecenas accumsan tellus diam, non dignissim augue tincidunt at. Curabitur ut urna et velit suscipit placerat ornare sit amet mi. Vivamus ac nisi eget lectus eleifend maximus. Nunc ullamcorper posuere eros vitae scelerisque. Maecenas vitae lacus dictum, imperdiet nibh a, varius odio. Phasellus elementum euismod laoreet. Mauris est dolor, tincidunt in vestibulum in, bibendum at velit. Maecenas non posuere elit.",
+                'type' => ContentType::T_CODE,
+                'format' => Format::F_JAVASCRIPT,
+                'data' => file_get_contents(__DIR__.'/jsExample.js')
             ]
         ]
     ]
@@ -122,7 +127,14 @@ function addChapter($ema, $parent, $title, $position, array $datas)
             $p = new Paragraph();
             $p->setType($ema->getRepository('\Org\Decatime\Entity\ContentType')->findOneById($paragraph['type']));
             $p->setFormat($ema->getRepository('\Org\Decatime\Entity\Format')->findOneById($paragraph['format']));
-            $p->setData($paragraph['data']);
+            if (isset($paragraph['data'])) {
+                $p->setData($paragraph['data']);
+            } elseif (isset($paragraph['rawData'])) {
+                $handle = fopen($paragraph['rawData'], "r");
+                $bytes = fread($handle, filesize($paragraph['rawData']));
+                $p->setRawData($bytes);
+                fclose($handle);
+            }
             $p->setContent($c);
             $p->setPosition($parapos);
 

@@ -23,7 +23,7 @@ final class Routes
         // home
         $app->get('/', 'HomeController:indexAction');
 
-        $app->get('/articles/{id:[0-9]+}/view', 'HomeController:viewArticleAction');
+        $app->get('/articles/{id:[0-9]+}/view[/{page:[0-9]+}]', 'HomeController:viewArticleAction');
 
         // private group begin
         $app->group(
