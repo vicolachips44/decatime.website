@@ -5,15 +5,34 @@
 {% block page_description %}{{ article.getShortDescription() }}{% endblock %}
 {% block body_content %}
 <div class="container-fluid">
-  {% if article is null %}
-  <h3>Cet article n'existe pas encore!</h3>
-  {% else %}
-  <h2>{{ article.getTitle() }}</h2>
-  {% set chapter_number = 1 %}
-  {% for chapter in article.getChapters() %}
-  {% include 'articles/_article-chapter.html.twig' with { 'chapter': chapter, 'chapter_number': chapter_number } %}
-  {% set chapter_number = chapter_number + 1 %}
-  {% endfor %}
-  {% endif %}
+  <div class="row">
+    <div class="col-md-10">
+      {% if article is null %}
+      <h3>Cet article n'existe pas encore!</h3>
+      {% else %}
+      <h2>{{ article.getTitle() }}</h2>
+      {% set chapter_number = 1 %}
+      {% for chapter in article.getChapters() %}
+      {% include 'articles/_article-chapter.html.twig' with { 'chapter': chapter, 'chapter_number': chapter_number } %}
+      {% set chapter_number = chapter_number + 1 %}
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="col-md-2" role="complementary">
+      <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+        <ul class="nav bs-docs-sidenav">
+        <li>
+        <a href="#toppage">Top</a>
+        </li>
+        {% for chapter in article.getChapters() %}
+        <li>
+        <a href="#{{ chapter.getTitle() }}">{{ chapter.getTitle() }}</a>
+        </li>
+        {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
