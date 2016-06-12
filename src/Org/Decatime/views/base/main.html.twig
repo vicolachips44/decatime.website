@@ -15,6 +15,7 @@
     {% else %}
     <link rel="stylesheet" href="/_static/style.min.css" />
     {% endif %}
+    <link rel="stylesheet" href="/_static/prism.css" />
   </head>
   <body data-debug-mode="{{ debug_mode }}" data-admin-session="{{ adminSession }}">
     {% include 'base/navbar.html.twig' %}
@@ -27,8 +28,9 @@
     {% if debug_mode %}
     <script src="/js/bootloader.js"></script>
     {% else %}
-    <script src="/_static/app.min.js"></script>:
+    <script src="/_static/app.min.js"></script>
     {% endif %}
+    <script src="/_static/prism.js"></script>
   </body>
 </html>
 

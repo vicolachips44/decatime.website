@@ -5,8 +5,8 @@
 /cache/
 /build/
 /config/.env
-/public/_static/
-!/public/_static/.gitkeep
+/public/_static/app.min.js
+/public/_static/style.min.js
 /public/fonts/
 /public/vendor/
 dbsite.sdb3
