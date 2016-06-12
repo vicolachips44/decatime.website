@@ -1,4 +1,4 @@
-<a name="{{ chapter.getTitle() }}"></a>
+<section id="{{ chapter.getTitle()|replace(' ', '_') }}" class="group">
 <h3>{{chapter_number}} - {{ chapter.getTitle() }}</h3>
   {% set content_number = 1 %}
   {% for content in chapter.getContents() %}
@@ -14,3 +14,4 @@
   {% for subChapter in chapter.getChapters() %}
   {% include 'articles/_article-chapter.html.twig' with { 'chapter': subChapter } %}
   {% endfor %}
+</section>

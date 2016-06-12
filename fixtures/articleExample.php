@@ -88,6 +88,59 @@ $chapter1 = addChapter($ema, $article1, "Introduction", 1, [
 ]);
 $ema->flush();
 
+$chapter2 = addChapter($ema, $article1, "Le dessous des cartes", 2, [
+    [
+        'title' => "Quoi qui a sous le capot ?",
+        'keywords'=> "key4, key5, key12",
+        'paragraphs' =>
+        [
+            [
+                'type' => ContentType::T_TEXT,
+                'format' => Format::F_TEXT,
+                'data' => 'En fait nodejs en a pas mal sous le capot. Un V8 ça dépote!',
+            ],
+            [
+                'type' => ContentType::T_TEXT,
+                'format' => Format::F_TEXT,
+                'data' => 'Ceci est un <b>autre</b> bout de paragraphe sans intérêt...',
+            ],
+            [
+                'type' => ContentType::T_TEXT,
+                'format' => Format::F_TEXT,
+                'data' => "Lorem ipsum dolor sit amet, <i>consectetur adipiscing elit</i>. Vestibulum porttitor ex enim, at mattis diam accumsan eget. Mauris at augue magna. Phasellus tempor, neque at imperdiet venenatis, ex elit scelerisque felis, non mattis orci metus ut dui. Vivamus dictum urna ut quam ornare, quis commodo mi interdum. Pellentesque cursus posuere tortor sed mollis. Integer placerat hendrerit tincidunt. Duis ultrices nisi nibh, sit amet commodo diam rhoncus ac. Donec et pellentesque ex. Integer commodo elementum dolor a vulputate. Fusce posuere, mauris quis sagittis ullamcorper, ex mi ullamcorper enim, sagittis fringilla felis dui non sem. Nulla sodales tincidunt quam ac aliquam. Donec ut augue est. Proin eu enim lectus."
+            ],
+            [
+                'type' => ContentType::T_TEXT,
+                'format' => Format::F_TEXT,
+                'data' => 'Ceci est un autre bout de paragraphe sans intérêt 4...',
+            ]
+        ]
+    ],
+    [
+        'title' => "Ou est - ce qu'on peut ce procurer nodeJS",
+        'keywords'=> "key18, key21, key16",
+        'paragraphs' =>
+        [
+            [
+                'type' => ContentType::T_TEXT,
+                'format' => Format::F_TEXT,
+                'data' => "Aenean eget scelerisque leo, vel efficitur nunc. Mauris eu felis nisi. In non lorem justo. Nulla congue eget nibh congue ornare. Vivamus et felis pellentesque, elementum eros ut, placerat lacus. Morbi tincidunt condimentum augue, eget viverra dolor sodales sit amet. Suspendisse aliquam interdum arcu et faucibus.",
+            ],
+            [
+                'type' => ContentType::T_CODE,
+                'format' => Format::F_JAVASCRIPT,
+                'data' => file_get_contents(__DIR__.'/jsExample.js')
+            ],
+            [
+                'type' => ContentType::T_TEXT,
+                'format' => Format::F_TEXT,
+                'data' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum porttitor ex enim, at mattis diam accumsan eget. Mauris at augue magna. Phasellus tempor, neque at imperdiet venenatis, ex elit scelerisque felis, non mattis orci metus ut dui. Vivamus dictum urna ut quam ornare, quis commodo mi interdum. Pellentesque cursus posuere tortor sed mollis. Integer placerat hendrerit tincidunt. Duis ultrices nisi nibh, sit amet commodo diam rhoncus ac. Donec et pellentesque ex. Integer commodo elementum dolor a vulputate. Fusce posuere, mauris quis sagittis ullamcorper, ex mi ullamcorper enim, sagittis fringilla felis dui non sem. Nulla sodales tincidunt quam ac aliquam. Donec ut augue est. Proin eu enim lectus."
+            ]
+        ]
+    ]
+]);
+$ema->flush();
+
 function createArticle($ema, $title, $shortDesc, array $topics)
 {
     $article = new Article();

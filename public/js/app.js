@@ -1,6 +1,7 @@
 define([
   'jquery',
   'knockout',
+  'bootstrap',
   'navbar/manager',
   'modal/private_area'
 ],
@@ -35,6 +36,10 @@ function($) {
             inst.boot(module.selector);
           });
         });
+      });
+      $('body').scrollspy({
+          target: '.bs-docs-sidebar',
+          offset: 40
       });
     }
   };

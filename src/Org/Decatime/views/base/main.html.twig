@@ -22,10 +22,11 @@
     <link href='https://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
   </head>
   <body data-debug-mode="{{ debug_mode }}" data-admin-session="{{ adminSession }}">
-    <a name="toppage"></a>
+    <section id="toppage">
     {% include 'base/navbar.html.twig' %}
     {% block body_content %}
     {% endblock %}
+    </section>
     {% block modal_dialogs %}
     {% include 'modal/private-area-login.html.twig' %}
     {% endblock %}
