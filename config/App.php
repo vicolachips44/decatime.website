@@ -10,7 +10,8 @@ final class App extends \Slim\App
         parent::__construct($this->loadSettings());
         $this->initDependencies();
         $this->initMiddlewares();
-        Routes::load($this);
+
+        Routes::getInstance()->load($this);
     }
 
     private function initEnv()

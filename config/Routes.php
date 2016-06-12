@@ -4,7 +4,21 @@ namespace Config;
 
 final class Routes
 {
-    public static function load($app)
+    private static $instance;
+
+    protected function __construct()
+    {
+    }
+
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new Routes();
+        }
+        return self::$instance;
+    }
+
+    public function load($app)
     {
         // home
         $app->get('/', 'HomeController:indexAction');
