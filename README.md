@@ -14,5 +14,20 @@ in *.env.example*
 + bower install
 + npm install
 + grunt
-+ ./runserv
++ ./bin/runserv
 
+### Database building
+If you don't change anything in .env configuration file then the default database is sqlite and is named: *dbsite.sdb3*.
+To build it run command:
+
+``` bash
+./bin/initdb
+```
+
+This will actually:
++ Drop the database if it exists
++ Create the schema
++ Update entities
++ load fixtures
+
+> Fixtures are located in fixtures folder in the root folder.
