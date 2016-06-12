@@ -20,7 +20,7 @@
   background-color: transparent;
 }
 .navbar-custom .navbar-text {
-  color: yellow;
+  color: black;
 }
 .navbar-custom .navbar-nav > li {
     padding-top: 28px;
@@ -29,7 +29,7 @@
     color: black;
 }
 .navbar-custom .navbar-nav > li > a {
-    color: white;
+    color: #660033;
     font-size: 22px;
     font-weight: bolder;
     height: 30px;
@@ -120,4 +120,22 @@
 }
 .navbar-custom .navbar-link:hover {
   color: #c0c0c0;
+}
+.btn.outline {
+	background: none;
+	padding: 12px 22px;
+    margin-top: 0px;
+}
+.btn-primary.outline {
+	border: 2px solid #660000;
+	color: #660000;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+	color: #660000;
+	border-color: #660000;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+	border-color: #660000;
+	color: #660000;
+	box-shadow: none;
 }
