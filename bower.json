@@ -21,6 +21,7 @@
     "knockout": "^3.4.*",
     "requirejs": "^2.1.*",
     "bootstrap": "^3.3.6",
-    "font-awesome": "^4.6.3"
+    "font-awesome": "^4.6.3",
+    "codemirror": "^5.15.2"
   }
 }

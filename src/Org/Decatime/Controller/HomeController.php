@@ -40,7 +40,7 @@ class HomeController extends AbstractController
 
         return $this->render(
             $response,
-            'article.html.twig',
+            'articles/article.html.twig',
             [
                 'article' => $article
             ]

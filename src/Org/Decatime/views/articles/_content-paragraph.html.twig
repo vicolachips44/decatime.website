@@ -1,0 +1,9 @@
+  {% if paragraph.getType().getId() == 4 %}
+  <pre><code class="language-{{ paragraph.getFormat().getName() }}">{{ paragraph.getData }}</code></pre>
+  {% endif %}
+  {% if paragraph.getType().getId() == 1 %}
+  <p>{{ paragraph.getData()|raw }}</p>
+  {% endif %}
+  {% if paragraph.getType().getId() == 2 %}
+  <p align="center"><img src="data:image/png;base64,{{ paragraph.getEncodedRawData() }}" alt="image"/></p>
+  {% endif %}

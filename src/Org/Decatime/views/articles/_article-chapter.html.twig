@@ -1,0 +1,15 @@
+<h3>{{chapter_number}} - {{ chapter.getTitle() }}</h3>
+  {% set content_number = 1 %}
+  {% for content in chapter.getContents() %}
+  {%
+    include 'articles/_chapter-content.html.twig' with {
+      'content': content,
+      'chapter_number': chapter_number,
+      'content_number': content_number
+    }
+  %}
+  {% set content_number = content_number + 1 %}
+  {% endfor %}
+  {% for subChapter in chapter.getChapters() %}
+  {% include 'articles/_article-chapter.html.twig' with { 'chapter': subChapter } %}
+  {% endfor %}
