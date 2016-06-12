@@ -6,7 +6,7 @@
 /build/
 /config/.env
 /public/_static/app.min.js
-/public/_static/style.min.js
+/public/_static/style.min.css
 /public/fonts/
 /public/vendor/
 dbsite.sdb3
