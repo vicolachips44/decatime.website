@@ -11,3 +11,5 @@
 /public/vendor/
 dbsite.sdb3
 /_private/
+/data/
+!/data/.gitkeep
