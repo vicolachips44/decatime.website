@@ -13,7 +13,7 @@
       <h2>{{ article.getTitle() }}</h2>
       {% set chapter_number = 1 %}
       {% for chapter in article.getChapters() %}
-      {% include 'articles/_article-chapter.html.twig' with { 'chapter': chapter, 'chapter_number': chapter_number } %}
+      {% include 'articles/partial/_article-chapter.html.twig' with { 'chapter': chapter, 'chapter_number': chapter_number } %}
       {% set chapter_number = chapter_number + 1 %}
       {% endfor %}
       {% endif %}

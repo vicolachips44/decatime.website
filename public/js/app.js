@@ -3,7 +3,8 @@ define([
   'knockout',
   'bootstrap',
   'navbar/manager',
-  'modal/private_area'
+  'modal/private_area',
+  'article/article_editor'
 ],
 function($) {
   'use strict';
@@ -11,7 +12,8 @@ function($) {
   var App = function() {
     this.modules = [
       { controller: 'navbar/manager', selector: $('#website-navbar-item') },
-      { controller: 'modal/private_area', selector: $('#private_area_login_box') }
+      { controller: 'modal/private_area', selector: $('#private_area_login_box') },
+      { controller: 'article/article_editor', selector: $('#article_editor') }
     ];
     this.params = null;
   };
@@ -37,9 +39,10 @@ function($) {
           });
         });
       });
+
       $('body').scrollspy({
-          target: '.bs-docs-sidebar',
-          offset: 40
+        target: '.bs-docs-sidebar',
+        offset: 40
       });
     }
   };

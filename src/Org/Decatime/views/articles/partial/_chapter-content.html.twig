@@ -1,4 +1,4 @@
 <h4>{{ chapter_number ~ '.' ~ content_number}} - {{ content.getTitle() }}</h4>
   {% for paragraph in content.getParagraphs() %}
-  {% include 'articles/_content-paragraph.html.twig' with { 'paragraph': paragraph } %}
+  {% include 'articles/partial/_content-paragraph.html.twig' with { 'paragraph': paragraph } %}
   {% endfor %}

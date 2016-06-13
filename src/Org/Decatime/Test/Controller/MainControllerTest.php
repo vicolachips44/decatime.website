@@ -2,17 +2,17 @@
 
 namespace Org\Decatime\Test\Controller;
 
-use Org\Decatime\Controller\HomeController;
+use Org\Decatime\Controller\MainController;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Symfony\Component\DomCrawler\Crawler;
 
-class HomeControllerTest extends ControllerTestCase
+class MainControllerTest extends ControllerTestCase
 {
     public function testIndexAction()
     {
-        $home  = new HomeController($this->getCtrlArgs());
+        $home  = new MainController($this->getCtrlArgs());
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/',
@@ -27,14 +27,14 @@ class HomeControllerTest extends ControllerTestCase
 
     public function testArticleAction()
     {
-        $home  = new HomeController($this->getCtrlArgs());
+        $home  = new MainController($this->getCtrlArgs());
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/articles/1/view',
             'QUERY_STRING'=>''
         ]);
         $request = Request::createFromEnvironment($env);
-        $response = $home->viewArticleAction($request, new Response(), ['id' => 1]);
+        $response = $home->viewAction($request, new Response(), ['id' => 1]);
         $html = (String) $response->getBody();
         $crawler = new Crawler($html);
         $this->assertEquals('Installation de nodeJS', $crawler->filter('head > title')->text());

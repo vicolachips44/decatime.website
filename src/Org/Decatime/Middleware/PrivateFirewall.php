@@ -5,7 +5,7 @@ namespace Org\Decatime\Middleware;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-final class PrivateMiddleware
+final class PrivateFirewall
 {
     private $session;
 

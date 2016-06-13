@@ -7,8 +7,9 @@ use Slim\Http\Response;
 use Monolog\Logger;
 
 use Org\Decatime\Adapter\ArticleAdapter;
+use Org\Decatime\Entity\Article;
 
-class HomeController extends AbstractController
+class MainController extends AbstractController
 {
     /**
      * indexAction handler.
@@ -28,11 +29,11 @@ class HomeController extends AbstractController
     }
 
     /**
-     * viewArticleAction handler.
+     * viewAction handler.
      *
      * {@inheritdoc}
      */
-    public function viewArticleAction(Request $request, Response $response, array $args)
+    public function viewAction(Request $request, Response $response, array $args)
     {
         $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
 
@@ -40,10 +41,35 @@ class HomeController extends AbstractController
 
         return $this->render(
             $response,
-            'articles/article.html.twig',
+            'articles/view.html.twig',
             [
                 'article' => $article
             ]
         );
+    }
+
+    /**
+     * editAction handler.
+     *
+     * {@inheritdoc}
+     */
+
+    public function editAction(Request $request, Response $response, array $args)
+    {
+        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+        $isNew = !isset($args['id']);
+        $article = new Article();
+        if (!$isNew) {
+            $article = $repo->find($args['id']);
+        }
+
+        return $this->render(
+            $response,
+            'articles/edit.html.twig',
+            [
+                'article' => $article
+            ]
+        );
+
     }
 }

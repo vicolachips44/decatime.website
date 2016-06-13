@@ -82,6 +82,10 @@ trait Dependencies
             return $ema;
         };
 
+        $container['privateFirewall'] = function ($c) {
+            return new \Org\Decatime\Middleware\PrivateFirewall($c->get('session'));
+        };
+
         $container['ctrl_base'] = function ($c) {
             return [
                 'twig' => $c->get('twig'),
@@ -92,8 +96,8 @@ trait Dependencies
         };
 
         // controllers - BEGIN
-        $container['HomeController'] = function ($c) {
-            return new \Org\Decatime\Controller\HomeController($c->get('ctrl_base'));
+        $container['MainController'] = function ($c) {
+            return new \Org\Decatime\Controller\MainController($c->get('ctrl_base'));
         };
         $container['PrivateController'] = function ($c) {
             return new \Org\Decatime\Controller\PrivateController($c->get('ctrl_base'));

@@ -36,9 +36,9 @@
 }
 .navbar-custom .navbar-nav > li > a:hover,
 .navbar-custom .navbar-nav > li > a:focus {
-  color: #cc9999;
+  color: #330000;
   background-color: transparent;
-  border-bottom: 2px yellow dashed;
+  border-bottom: 2px green dashed;
 }
 .navbar-custom .navbar-nav > .active > a,
 .navbar-custom .navbar-nav > .active > a:hover,

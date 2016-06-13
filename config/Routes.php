@@ -21,11 +21,12 @@ final class Routes
     public function load($app)
     {
         // home
-        $app->get('/', 'HomeController:indexAction');
+        $app->get('/', 'MainController:indexAction');
 
-        $app->get('/articles/{id:[0-9]+}/view[/{page:[0-9]+}]', 'HomeController:viewArticleAction');
+        // view articles
+        $app->get('/articles/view/{id:[0-9]+}', 'MainController:viewAction');
 
-        // private group begin
+        // login admin
         $app->group(
             '/private',
             function () {
@@ -34,11 +35,10 @@ final class Routes
                 $this->get('/admin', 'PrivateController:adminAction')
                     ->setName('private_admin');
             }
-        )->add(
-            new \Org\Decatime\Middleware\PrivateMiddleware(
-                $app->getContainer()->get('session')
-            )
-        );
-        // private group end
+        )->add('privateFirewall');
+
+        // edit article
+        $app->get('/articles/edit[/{id:[0-9]+}]', 'MainController:editAction')
+            ->add('privateFirewall');
     }
 }
