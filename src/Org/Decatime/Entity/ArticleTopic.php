@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table
  */
-class ArticleTopic
+class ArticleTopic implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -86,5 +86,13 @@ class ArticleTopic
     public function getTopic()
     {
         return $this->topic;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->topic->getId(),
+            'name' => $this->topic->getName()
+        ];
     }
 }

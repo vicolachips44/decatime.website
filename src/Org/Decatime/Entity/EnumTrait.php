@@ -64,4 +64,12 @@ trait EnumTrait
     {
         return $this->name;
     }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }

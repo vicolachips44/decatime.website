@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table
  */
-class Chapter
+class Chapter implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -234,5 +234,24 @@ class Chapter
     public function getArticle()
     {
         return $this->article;
+    }
+
+    public function jsonSerialize()
+    {
+        $acontents = [];
+        foreach ($this->contents as $content) {
+            $acontents[] = json_encode($content);
+        }
+        $achapters = [];
+        foreach ($this->chapters as $chapter) {
+            $achapters[] = json_encode($chapter);
+        }
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'position' => $this->position,
+            'contents' => $acontents,
+            'chapters' => $achapters
+        ];
     }
 }

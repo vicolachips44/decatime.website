@@ -12,9 +12,9 @@ class ArticleRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT a FROM Org\Decatime\Entity\Article a
-                inner join a.chapters chapter
-                inner join chapter.contents content
-                inner join content.paragraphs paragraph
+                left join a.chapters chapter
+                left join chapter.contents content
+                left join content.paragraphs paragraph
                 WHERE a.id = :id
                 ORDER BY chapter.position, content.position, paragraph.position
             ')

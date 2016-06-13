@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table
  */
-class ContentType
+class ContentType implements \JsonSerializable
 {
     const T_TEXT = 1;
     const T_IMAGE = 2;

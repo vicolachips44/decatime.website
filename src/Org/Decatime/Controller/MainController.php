@@ -58,18 +58,35 @@ class MainController extends AbstractController
     {
         $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
         $isNew = !isset($args['id']);
-        $article = new Article();
-        if (!$isNew) {
-            $article = $repo->find($args['id']);
+        if ($isNew && !$request->isPost()) {
+            return $this->articleEditorView(new Article(), $response);
         }
 
+        $article = $isNew ? new Article() : $repo->loadArticle($args['id']);
+
+        if ($request->isPost()) {
+            $adapter = new ArticleAdapter($article);
+
+            if ($adapter->hydrateFromRequest($request)) {
+                $this->ema->persist($article);
+                $this->ema->flush();
+                return $response->withRedirect(
+                    $this->router->pathFor('article_edit', ['id' => $article->getId()])
+                );
+            }
+        }
+        return $this->articleEditorView($article, $response);
+    }
+
+    protected function articleEditorView(Article $article, Response $response)
+    {
         return $this->render(
             $response,
             'articles/edit.html.twig',
             [
-                'article' => $article
+                'article' => json_encode($article),
+                'article_id' => $article->getId()
             ]
         );
-
     }
 }

@@ -38,7 +38,8 @@ final class Routes
         )->add('privateFirewall');
 
         // edit article
-        $app->get('/articles/edit[/{id:[0-9]+}]', 'MainController:editAction')
-            ->add('privateFirewall');
+        $app->map(['GET', 'POST'], '/articles/edit[/{id:[0-9]+}]', 'MainController:editAction')
+            ->add('privateFirewall')
+            ->setName('article_edit');
     }
 }

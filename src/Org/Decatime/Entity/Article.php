@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Org\Decatime\Repository\ArticleRepository")
  * @ORM\Table
  */
-class Article
+class Article implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -95,6 +95,16 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get isNew
+     *
+     * @return boolean
+     */
+    public function isNew()
+    {
+        return $this->id === null;
     }
 
     /**
@@ -202,7 +212,8 @@ class Article
      */
     public function setShortDescription($shortDescription)
     {
-        $this->shortDescription = $shortDescription;
+
+        $this->shortDescription = preg_replace("/\r|\n/", "", $shortDescription);
 
         return $this;
     }
@@ -309,6 +320,14 @@ class Article
         return $this->smallImage;
     }
 
+    public function getEncodedSmallImage()
+    {
+        if ($this->smallImage !== null) {
+            return base64_encode(stream_get_contents($this->smallImage));
+        }
+        return null;
+    }
+
     /**
      * Set bigImage
      *
@@ -331,5 +350,37 @@ class Article
     public function getBigImage()
     {
         return $this->bigImage;
+    }
+
+    public function getEncodedBigImage()
+    {
+        if ($this->bigImage !== null) {
+            return base64_encode(stream_get_contents($this->bigImage));
+        }
+        return null;
+    }
+
+    public function jsonSerialize()
+    {
+        $atopics = [];
+        foreach ($this->articleTopics as $articleTopic) {
+            $atopics[] = json_encode($articleTopic);
+        }
+        $achapters = [];
+        foreach ($this->chapters as $chapter) {
+            $achapters[] = json_encode($chapter);
+        }
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'createdAt' => $this->createdAt,
+            'updatedAt' => $this->updatedAt,
+            'publishedAt' => $this->publishedAt,
+            'shortDescription' => $this->shortDescription,
+            'smallImage' => $this->getEncodedSmallImage(),
+            'bigImage' => $this->getEncodedBigImage(),
+            'topics' => $atopics,
+            'chapters' => $achapters
+        ];
     }
 }

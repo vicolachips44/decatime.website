@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table
  */
-class Paragraph
+class Paragraph implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -99,7 +99,10 @@ class Paragraph
 
     public function getEncodedRawData()
     {
-        return base64_encode(stream_get_contents($this->rawData));
+        if ($this->rawData !== null) {
+            return base64_encode(stream_get_contents($this->rawData));
+        }
+        return null;
     }
 
     /**
@@ -244,5 +247,18 @@ class Paragraph
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'rawData' => $this->getEncodedRawData(),
+            'data' => $this->data,
+            'version' => $this->version,
+            'position' => $this->position,
+            'type' => json_encode($this->type),
+            'format' => json_encode($this->format)
+        ];
     }
 }

@@ -2,9 +2,36 @@
 
 {% block page_title %}Edition article{% endblock %}
 {% block body_content %}
-<div id="article_editor" class="container-fluid">
-  <div class="row">
-    <h3>on the run...
+{% if article_id is not null %}
+{% set action_target = path_for('article_edit', {'id': article_id}) %}
+{% else %}
+{% set action_target = path_for('article_edit') %}
+{% endif %}
+<div class="container">
+  <div id="article_editor" data-initial="{{ article }}">
+    <div class="row" id="article_editor_article">
+      <form action="{{ action_target }}" method="post" enctype="multipart/form-data">
+        <fieldset class="form-group">
+          <label for="article_title">Titre de l'article</label>
+          <input name="article_title" type="text" data-bind="value: title" class="form-control" id="article_title">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="article_short_description">Description courte</label>
+          <textarea name="article_short_description" rows="5" data-bind="value: shortDescription" class="form-control" id"article_short_description"></textarea>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="article_small_image">Petite illustration</label>
+          <input name="article_small_image" type="file" class="form-control-file" id=article_small_image">
+          <img data-bind="attr: {src: smallImageSrc }">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="article_big_image">Grande illustration</label>
+          <input name="article_big_image" type="file" class="form-control-file" id=article_big_image">
+          <img data-bind="attr: {src: bigImageSrc }">
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}

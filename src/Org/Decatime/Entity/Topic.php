@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table
  */
-class Topic
+class Topic implements \JsonSerializable
 {
     const T_JAVASCRIPT = 1;
     const T_HTML5 = 2;

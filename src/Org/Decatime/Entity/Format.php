@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table
  */
-class Format
+class Format implements \JsonSerializable
 {
     const F_TEXT = 1;
     const F_RST = 2;

@@ -14,6 +14,7 @@ abstract class AbstractController
     protected $logger;
     protected $session;
     protected $ema;
+    protected $router;
 
     public function __construct(array $dependencies)
     {
@@ -21,6 +22,7 @@ abstract class AbstractController
         $this->logger = $dependencies['logger'];
         $this->session = $dependencies['session'];
         $this->ema = $dependencies['ema'];
+        $this->router = $dependencies['router'];
     }
 
     protected function render(Response $response, $template, array $viewArgs = [])

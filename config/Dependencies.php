@@ -91,7 +91,8 @@ trait Dependencies
                 'twig' => $c->get('twig'),
                 'logger' => $c->get('logger'),
                 'session' => $c->get('session'),
-                'ema' => $c->get('ema')
+                'ema' => $c->get('ema'),
+                'router' => $c->get('router')
             ];
         };
 
