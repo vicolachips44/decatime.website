@@ -16,6 +16,7 @@ module.exports = function(grunt) {
           'public/_static/style.min.css': [
             'public/vendor/bootstrap/dist/css/bootstrap.css',
             'public/vendor/bootstrap/dist/css/bootstrap-theme.css',
+            'public/vendor/font-awesome/css/font-awesome.css',
             'public/css/bootstrap-override.css',
             'public/css/main.css'
           ]
