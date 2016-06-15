@@ -26,4 +26,17 @@ class ArticleRepository extends EntityRepository
         }
         return $results[0];
     }
+
+    public function loadLatestArticles()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT a FROM Org\Decatime\Entity\Article a
+                WHERE a.publishedAt is not null
+                ORDER BY a.createdAt desc
+            ')
+            ->setMaxResults(3);
+
+        return $query->getResult();
+    }
 }

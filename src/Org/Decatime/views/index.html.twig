@@ -3,9 +3,25 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 {% block body_content %}
 <div class="container-fluid">
-  <h3>On the run...</h3>
-<pre><code class="language-php"><&#63;php
-echo phpinfo();
-</code></pre>
+  <h2>Derniers articles</h2>
+  {% for article in articles %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    image
+                </td>
+                <td>
+                    <h4>{{ article.getTitle() }}</h4>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                <p>{{ article.getShortDescription() }}
+            </td>
+            </tr>
+        </tbody>
+    </table>
+  {% endfor %}
 </div>
 {% endblock %}

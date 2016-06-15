@@ -19,11 +19,15 @@ class MainController extends AbstractController
     public function indexAction(Request $request, Response $response, array $args)
     {
         $this->logger->log(Logger::DEBUG, 'Ce message appraît dans le log et dans le web!');
+        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+
+        $articles = $repo->loadLatestArticles();
         return $this->render(
             $response,
             'index.html.twig',
             [
-                'page_title' => 'Decatime - home'
+                'page_title' => 'Decatime - home',
+                'articles' => $articles
             ]
         );
     }

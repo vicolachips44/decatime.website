@@ -146,6 +146,7 @@ function createArticle($ema, $title, $shortDesc, array $topics)
     $article = new Article();
     $article->setTitle($title);
     $article->setCreatedAt(new \DateTime());
+    $article->setPublishedAt(new \DateTime());
     $article->setShortDescription($shortDesc);
     foreach ($topics as $topic) {
         $articleTopic = new ArticleTopic();
