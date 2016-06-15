@@ -10,7 +10,7 @@ function($, ko, Article) {
     console.log('in article editor constructor...');
     this.rawData = $('#article_editor').data('initial');
     console.log(this.rawData);
-    this.article = new Article(this.rawData, $('#article_editor_article')[0]);
+    this.article = new Article(this.rawData, $('#article_editor')[0]);
     // this.rawData.chapters.forEach(function(chapter) {
     //   var objChapter = JSON.parse(chapter);
     //   objChapter.contents.forEach(function(content) {

@@ -15,6 +15,7 @@ abstract class AbstractController
     protected $session;
     protected $ema;
     protected $router;
+    protected $imageManager;
 
     public function __construct(array $dependencies)
     {
@@ -23,6 +24,7 @@ abstract class AbstractController
         $this->session = $dependencies['session'];
         $this->ema = $dependencies['ema'];
         $this->router = $dependencies['router'];
+        $this->imageManager = $dependencies['imageManager'];
     }
 
     protected function render(Response $response, $template, array $viewArgs = [])

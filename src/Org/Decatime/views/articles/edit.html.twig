@@ -7,10 +7,13 @@
 {% else %}
 {% set action_target = path_for('article_edit') %}
 {% endif %}
-<div class="container">
-  <div id="article_editor" data-initial="{{ article }}">
-    <div class="row" id="article_editor_article">
-      <form action="{{ action_target }}" method="post" enctype="multipart/form-data">
+<div class="container-fluid">
+  <div class="panel panel-default" id="article_editor" data-initial="{{ article }}">
+    <div class="panel-heading">
+      Article
+    </div>
+    <div class="panel-body">
+      <form class="form" action="{{ action_target }}" method="post" enctype="multipart/form-data">
         <fieldset class="form-group">
           <label for="article_title">Titre de l'article</label>
           <input name="article_title" type="text" data-bind="value: title" class="form-control" id="article_title">
@@ -29,8 +32,45 @@
           <input name="article_big_image" type="file" class="form-control-file" id=article_big_image">
           <img data-bind="attr: {src: bigImageSrc }">
         </fieldset>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary pull-right">Sauvegarder</button>
       </form>
+    </div>
+    <div class="panel panel-default" data-bind="foreach: chapters">
+      <div class="panel-heading">
+        Chapitre <span data-bind="text: $data.position">
+      </div>
+      <div class="panel-body">
+        <fieldset class="form-group">
+          <label>Titre du chapitre</label>
+          <input class="form-control" type="text" data-bind="value: $data.title">
+        </fieldset>
+      </div>
+      <div class="panel panel-default" data-bind="foreach: $data.contents">
+        <div class="panel-heading">
+          Contenu <span data-bind="text: $data.position">
+        </div>
+        <div class="panel-body">
+          <fieldset class="form-group">
+            <label>Titre du contenu</label>
+            <input class="form-control" type="text" data-bind="value: $data.title">
+          </fieldset>
+        </div>
+        <div class="panel panel-default" data-bind="foreach: $data.paragraphs">
+          <div class="panel-heading">
+            Paragraphe <span data-bind="text: $data.position"></span>
+          </div>
+          <div class="panel-body">
+            <fieldset class="form-group">
+              <div data-bind="visible: $data.simpleText">
+                <textarea rows="5" class="form-group" data-bind="value: $data.data" style="min-width: 100%"></textarea>
+              </div>
+              <div data-bind="visible: !$data.simpleText">
+                <p align="center"><img data-bind="attr: { src: $data.rawData }" alt="image"/></p>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

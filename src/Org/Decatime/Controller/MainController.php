@@ -69,7 +69,7 @@ class MainController extends AbstractController
         $article = $isNew ? new Article() : $repo->loadArticle($args['id']);
 
         if ($request->isPost()) {
-            $adapter = new ArticleAdapter($article);
+            $adapter = new ArticleAdapter($article, $this->imageManager);
 
             if ($adapter->hydrateFromRequest($request)) {
                 $this->ema->persist($article);

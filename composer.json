@@ -19,7 +19,8 @@
         "slim/twig-view": "^2.1",
         "akrabat/rka-slim-session-middleware": "^2.0",
         "doctrine/orm": "2.5.*",
-        "vlucas/phpdotenv": "^2.2"
+        "vlucas/phpdotenv": "^2.2",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
       "symfony/dom-crawler": "^3.1",

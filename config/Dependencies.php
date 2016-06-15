@@ -82,6 +82,11 @@ trait Dependencies
             return $ema;
         };
 
+        // image manager service
+        $container['imageManager'] = function ($c) {
+            return new \Intervention\Image\ImageManager();
+        };
+
         $container['privateFirewall'] = function ($c) {
             return new \Org\Decatime\Middleware\PrivateFirewall($c->get('session'));
         };
@@ -92,7 +97,8 @@ trait Dependencies
                 'logger' => $c->get('logger'),
                 'session' => $c->get('session'),
                 'ema' => $c->get('ema'),
-                'router' => $c->get('router')
+                'router' => $c->get('router'),
+                'imageManager' => $c->get('imageManager')
             ];
         };
 

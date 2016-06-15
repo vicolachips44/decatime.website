@@ -4,14 +4,17 @@ namespace Org\Decatime\Adapter;
 
 use Org\Decatime\Entity\Article;
 use Slim\Http\Request;
+use Intervention\Image\ImageManager;
 
 final class ArticleAdapter
 {
     private $article;
+    private $imageManager;
 
-    public function __construct(Article $article)
+    public function __construct(Article $article, ImageManager $imageManager)
     {
         $this->article = $article;
+        $this->imageManager = $imageManager;
     }
 
     public function hydrateFromRequest(Request $request)
@@ -34,13 +37,15 @@ final class ArticleAdapter
     private function processUploadedFiles(array $uploadedFiles)
     {
         foreach ($uploadedFiles as $key => $uploadedFile) {
-            if ($uploadedFile->file !== '') {
-                $raw = file_get_contents($uploadedFile->file);
-                if ($key === 'article_small_image') {
-                    $this->article->setSmallImage($raw);
-                } else {
-                    $this->article->setBigImage($raw);
-                }
+            if ($uploadedFile->file === '') {
+                continue;
+            }
+
+            $raw = $this->imageManager->make($uploadedFile->file);
+            if ($key === 'article_small_image') {
+                $this->article->setSmallImage($raw->resize(120, 80)->encode('png', 70));
+            } else {
+                $this->article->setBigImage($raw->resize(400, 300)->encode('png', 70));
             }
         }
     }
