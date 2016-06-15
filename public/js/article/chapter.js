@@ -13,18 +13,23 @@ function($, ko, Content) {
     this.position = data.position;
     this.title = ko.observable(data.title);
     this.contents = ko.observableArray([]);
-    data.contents.forEach(function(content) {
-      console.log(JSON.parse(content));
-      _this.contents.push(new Content(JSON.parse(content)));
-    });
     this.isActive = ko.observable(active);
+
+    data.contents.forEach(function(content) {
+      var contentObj = JSON.parse(content);
+      var isActive = contentObj.position === 1;
+      _this.contents.push(new Content(contentObj, isActive, _this));
+    });
   };
 
   Chapter.prototype.constructor = Chapter;
-  Chapter.prototype.onChapterClick = function (data, event) {
+  Chapter.prototype.onChapterClick = function () {
     this.article.setActiveChapter(this);
-    console.log(data);
-    console.log(event);
+  };
+  Chapter.prototype.setActiveContent = function (content) {
+    this.contents().forEach(function(item) {
+      item.isActive(item.id === content.id);
+    });
   };
 
   return Chapter;

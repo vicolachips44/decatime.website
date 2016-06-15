@@ -52,29 +52,34 @@
           <input class="form-control" type="text" data-bind="value: $data.title">
         </fieldset>
       </div>
-      <div class="panel panel-default panel-no-border" data-bind="foreach: $data.contents">
-        <div class="panel-heading">
-          Contenu <span data-bind="text: $data.position">
-        </div>
-        <div class="panel-body">
-          <fieldset class="form-group">
-            <label>Titre du contenu</label>
-            <input class="form-control" type="text" data-bind="value: $data.title">
-          </fieldset>
-        </div>
-        <div class="panel panel-default panel-no-border" data-bind="foreach: $data.paragraphs">
+      <ul class="nav nav-pills" data-bind="foreach: $data.contents">
+        <li role="presentation" data-bind="css: $data.isActive() ? 'active' : ''"><a href="#" data-bind="text: $data.title, click: onContentClick"></a></li>
+      </ul>
+      <div data-bind="foreach: $data.contents">
+        <div class="panel panel-default panel-no-border" data-bind="visible: $data.isActive">
           <div class="panel-heading">
-            Paragraphe <span data-bind="text: $data.position"></span>
+            Contenu <span data-bind="text: $data.position">
           </div>
           <div class="panel-body">
             <fieldset class="form-group">
-              <div data-bind="visible: $data.simpleText">
-                <textarea rows="5" class="form-group" data-bind="value: $data.data" style="min-width: 100%"></textarea>
-              </div>
-              <div data-bind="visible: !$data.simpleText">
-                <p align="center"><img data-bind="attr: { src: $data.rawData }" alt="image"/></p>
-              </div>
+              <label>Titre du contenu</label>
+              <input class="form-control" type="text" data-bind="value: $data.title">
             </fieldset>
+          </div>
+          <div class="panel panel-default panel-no-border" data-bind="foreach: $data.paragraphs">
+            <div class="panel-heading">
+              Paragraphe <span data-bind="text: $data.position"></span>
+            </div>
+            <div class="panel-body">
+              <fieldset class="form-group">
+                <div data-bind="visible: $data.simpleText">
+                  <textarea rows="5" class="form-group" data-bind="value: $data.data" style="min-width: 100%"></textarea>
+                </div>
+                <div data-bind="visible: !$data.simpleText">
+                  <p align="center"><img data-bind="attr: { src: $data.rawData }" alt="image"/></p>
+                </div>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>

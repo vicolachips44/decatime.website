@@ -27,7 +27,6 @@ function($, ko, Chapter) {
     data.chapters.forEach(function(chapter) {
       var objChapter = JSON.parse(chapter);
       var active = objChapter.position === 1;
-      console.log(active);
       _this.chapters.push(new Chapter(objChapter, active, _this));
     });
 
