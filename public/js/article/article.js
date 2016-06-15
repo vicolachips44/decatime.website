@@ -25,13 +25,21 @@ function($, ko, Chapter) {
 
     this.chapters = ko.observableArray([]);
     data.chapters.forEach(function(chapter) {
-      _this.chapters.push(new Chapter(JSON.parse(chapter)));
+      var objChapter = JSON.parse(chapter);
+      var active = objChapter.position === 1;
+      console.log(active);
+      _this.chapters.push(new Chapter(objChapter, active, _this));
     });
 
     ko.applyBindings(this, $scope);
   };
 
   Article.prototype.constructor = Article;
+  Article.prototype.setActiveChapter = function (chapter) {
+    this.chapters().forEach(function(item) {
+      item.isActive(item.id === chapter.id);
+    });
+  };
 
   return Article;
 });

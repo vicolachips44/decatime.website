@@ -46,3 +46,6 @@ p + p {
     border-bottom: 1px brown dashed;
     margin: 10px;
 }
+.panel-no-border {
+    border: 0;
+}
