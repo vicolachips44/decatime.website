@@ -5,23 +5,17 @@
 <div class="container-fluid">
   <h2>Derniers articles</h2>
   {% for article in articles %}
-    <table class="table">
-        <tbody>
-            <tr>
-                <td>
-                    image
-                </td>
-                <td>
-                    <h4>{{ article.getTitle() }}</h4>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                <p>{{ article.getShortDescription() }}
-            </td>
-            </tr>
-        </tbody>
-    </table>
+  <div class="row article-list">
+    <div class="col-md-2">
+      <img src='data:image/png;base64,{{ article.getEncodedSmallImage() }}'>
+    </div>
+    <div class="col-md-10">
+      <h4><a href="{{ path_for('article_view', {'id': article.getId()}) }}">{{ article.getTitle() }}</a></h4>
+      <div class="row">
+        <p>{{ article.getShortDescription() }}
+      </div>
+    </div>
+  </div>
   {% endfor %}
 </div>
 {% endblock %}

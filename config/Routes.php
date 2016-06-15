@@ -24,7 +24,8 @@ final class Routes
         $app->get('/', 'MainController:indexAction');
 
         // view articles
-        $app->get('/articles/view/{id:[0-9]+}', 'MainController:viewAction');
+        $app->get('/articles/view/{id:[0-9]+}', 'MainController:viewAction')
+            ->setName('article_view');
 
         // login admin
         $app->group(

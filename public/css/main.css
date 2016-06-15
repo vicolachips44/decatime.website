@@ -41,3 +41,8 @@ p {
 p + p {
     text-indent: 1em;
 }
+
+.article-list {
+    border-bottom: 1px brown dashed;
+    margin: 10px;
+}
