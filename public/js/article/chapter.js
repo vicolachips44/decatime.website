@@ -8,8 +8,8 @@ function($, ko, Content) {
 
   var Chapter = function(data, active, article) {
     var _this = this;
-    this.id = data.id;
     this.article = article;
+    this.id = data.id;
     this.position = data.position;
     this.title = ko.observable(data.title);
     this.contents = ko.observableArray([]);
@@ -23,13 +23,25 @@ function($, ko, Content) {
   };
 
   Chapter.prototype.constructor = Chapter;
-  Chapter.prototype.onChapterClick = function () {
-    this.article.setActiveChapter(this);
+
+  Chapter.prototype.onChapterClick = function (item) {
+    this.article.setActiveChapter(item);
   };
+
   Chapter.prototype.setActiveContent = function (content) {
     this.contents().forEach(function(item) {
       item.isActive(item.id === content.id);
     });
+  };
+
+  // CLASSIFIER SCOPE METHODS
+  Chapter.newItem = function(title, pos) {
+    return {
+      id: null,
+      title: title,
+      position: pos,
+      contents: []
+    };
   };
 
   return Chapter;

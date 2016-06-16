@@ -8,6 +8,7 @@ use Monolog\Logger;
 
 use Org\Decatime\Adapter\ArticleAdapter;
 use Org\Decatime\Entity\Article;
+use Org\Decatime\Entity\Chapter;
 
 class MainController extends AbstractController
 {
@@ -80,6 +81,28 @@ class MainController extends AbstractController
             }
         }
         return $this->articleEditorView($article, $response);
+    }
+
+    public function ajaxSaveChapterAction(Request $request, Response $response)
+    {
+        if ($request->isXhr() === false) {
+            // bad request
+            return $response->withStatus(400);
+        }
+
+        $data = $request->getParsedBody();
+        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+        $article = $repo->find($data['article_id']);
+        $chapter = new Chapter();
+        $chapter->setTitle($data['chapter']['title']);
+        $chapter->setPosition($data['chapter']['position']);
+        $article->addChapter($chapter);
+        $chapter->setArticle($article);
+
+        $this->ema->persist($chapter);
+        $this->ema->flush();
+
+        return $response->withJson(['id' => $chapter->getId()]);
     }
 
     protected function articleEditorView(Article $article, Response $response)

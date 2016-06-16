@@ -14,7 +14,11 @@ function($, ko, Article) {
 
   ArticleEditor.prototype.constructor = ArticleEditor;
   ArticleEditor.prototype.init = function() {
-
+    var _this = this;
+    $('#article_item_validate_button').on('click', function() {
+      $('#article_item').modal('hide');
+      _this.article.newItemTitle($('#article_item_value').val());
+    });
   };
   ArticleEditor.prototype.boot = function() {
 

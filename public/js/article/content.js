@@ -6,10 +6,10 @@ define(
 ],
 function($, ko, Paragraph) {
 
-  var Content = function(data, active, chapter) {
+  var Content = function(data, active, article) {
     var _this = this;
     this.id = data.id;
-    this.chapter = chapter;
+    this.article = article;
     this.position = ko.observable(data.position);
     this.keywords = ko.observable(data.keywords);
     this.title = ko.observable(data.title);
@@ -23,7 +23,7 @@ function($, ko, Paragraph) {
 
   Content.prototype.constructor = Content;
   Content.prototype.onContentClick = function() {
-    this.chapter.setActiveContent(this);
+    this.article.setActiveContent(this);
   };
 
   return Content;

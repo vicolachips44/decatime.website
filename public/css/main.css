@@ -49,3 +49,14 @@ p + p {
 .panel-no-border {
     border: 0;
 }
+.decatime-toolbar {
+    color: #4E4F51;
+    font-size: 22px;
+}
+.decatime-toolbar>.fa {
+    cursor: pointer;
+    cursor: hand;
+}
+.decatime-toolbar>.fa:hover {
+    color: green;
+}

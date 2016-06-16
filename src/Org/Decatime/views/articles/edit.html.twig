@@ -7,7 +7,11 @@
 {% else %}
 {% set action_target = path_for('article_edit') %}
 {% endif %}
-<div class="container-fluid" id="article_editor" data-initial="{{ article }}">
+<div
+  class="container-fluid"
+  id="article_editor"
+  data-initial="{{ article }}"
+  data-ajax_save_chapter="{{ path_for('ajax_save_chapter') }}">
   <div class="panel panel-default">
     <div class="panel-heading">
       Article
@@ -37,10 +41,18 @@
     </div>
   </div>
   <div class="panel">
-  <ul class="nav nav-pills" data-bind="foreach: $root.chapters">
-    <li role="presentation" data-bind="css: $data.isActive() ? 'active' : ''"><a href="#" data-bind="text: $data.title, click: onChapterClick"></a></li>
-  </ul>
-</div>
+    <div class="panel-body">
+      <div class="col-md-10">
+        <ul class="nav nav-pills" data-bind="foreach: $root.chapters">
+          <li role="presentation" data-bind="css: $data.isActive() ? 'active' : ''"><a href="#" data-bind="text: $data.title, click: onChapterClick"></a></li>
+        </ul>
+      </div>
+      <div class="col-md-2 text-right decatime-toolbar">
+        <i class="fa fa-plus-square" aria-hidden="true" data-bind="click: $root.onBtnAddChapter"></i>
+        <i class="fa fa-minus-square" aria-hidden="true" data-bind="click: $root.onBtnRemoveChapter"></i>
+      </div>
+    </div>
+  </div>
   <div data-bind="foreach: $root.chapters">
     <div class="panel panel-default panel-no-border" data-bind="visible: $data.isActive">
       <div class="panel-heading">
@@ -87,3 +99,8 @@
   </div>
 </div>
 {% endblock %}
+{% block modal_dialogs %}
+{{ parent() }}
+{% include 'modal/add-item-title.html.twig' %}
+{% endblock %}
+

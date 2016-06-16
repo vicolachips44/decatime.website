@@ -42,5 +42,10 @@ final class Routes
         $app->map(['GET', 'POST'], '/articles/edit[/{id:[0-9]+}]', 'MainController:editAction')
             ->add('privateFirewall')
             ->setName('article_edit');
+
+        // save chapter
+        $app->post('/articles/ajax-save-chapter', 'MainController:ajaxSaveChapterAction')
+            ->add('privateFirewall')
+            ->setName('ajax_save_chapter');
     }
 }
