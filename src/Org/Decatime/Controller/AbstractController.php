@@ -17,14 +17,14 @@ abstract class AbstractController
     protected $router;
     protected $imageManager;
 
-    public function __construct(array $dependencies)
+    public function __construct($container)
     {
-        $this->twig = $dependencies['twig'];
-        $this->logger = $dependencies['logger'];
-        $this->session = $dependencies['session'];
-        $this->ema = $dependencies['ema'];
-        $this->router = $dependencies['router'];
-        $this->imageManager = $dependencies['imageManager'];
+        $this->twig = $container->get('twig');
+        $this->logger = $container->get('logger');
+        $this->session = $container->get('session');
+        $this->ema = $container->get('ema');
+        $this->router = $container->get('router');
+        $this->imageManager = $container->get('imageManager');
     }
 
     protected function render(Response $response, $template, array $viewArgs = [])

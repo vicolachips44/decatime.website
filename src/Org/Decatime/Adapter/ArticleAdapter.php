@@ -3,7 +3,6 @@
 namespace Org\Decatime\Adapter;
 
 use Org\Decatime\Entity\Article;
-use Slim\Http\Request;
 use Intervention\Image\ImageManager;
 
 final class ArticleAdapter
@@ -17,10 +16,10 @@ final class ArticleAdapter
         $this->imageManager = $imageManager;
     }
 
-    public function hydrateFromRequest(Request $request)
+    public function hydrate(array $args, array $files)
     {
-        $this->processProperties($request->getParsedBody());
-        $this->processUploadedFiles($request->getUploadedFiles());
+        $this->processProperties($args);
+        $this->processUploadedFiles($files);
 
         return true;
     }

@@ -26,7 +26,7 @@ function($, ko, Chapter) {
     $.ajax({
       url: $('#article_editor').data('ajax_delete_chapter'),
       type: 'POST',
-      data: { chapter_id: article.activeChapter.id },
+      data: { id: article.activeChapter.id },
       success: function() {
         console.log('ok');
         var position = article.activeChapter.position - 1;

@@ -72,7 +72,7 @@ class MainController extends AbstractController
         if ($request->isPost()) {
             $adapter = new ArticleAdapter($article, $this->imageManager);
 
-            if ($adapter->hydrateFromRequest($request)) {
+            if ($adapter->hydrate($request->getParsedBody(), $request->getUploadedFiles())) {
                 $this->ema->persist($article);
                 $this->ema->flush();
                 return $response->withRedirect(
@@ -93,8 +93,8 @@ class MainController extends AbstractController
         $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
         $article = $repo->find($data['article_id']);
         $chapter = new Chapter();
-        $chapter->setTitle($data['chapter']['title']);
-        $chapter->setPosition($data['chapter']['position']);
+        $adapter = new ChapterAdapter($chapter);
+        $adapter->hydrate($data['chapter']);
         $article->addChapter($chapter);
         $chapter->setArticle($article);
 
@@ -111,7 +111,7 @@ class MainController extends AbstractController
         }
         $data = $request->getParsedBody();
         $repo = $this->ema->getRepository('Org\Decatime\Entity\Chapter');
-        $chapter = $repo->find($data['chapter_id']);
+        $chapter = $repo->find($data['id']);
         $this->ema->remove($chapter);
         $this->ema->flush();
         return $response->withJson(['status' => 'ok']);
@@ -125,8 +125,8 @@ class MainController extends AbstractController
         $data = $request->getParsedBody();
         $repo = $this->ema->getRepository('Org\Decatime\Entity\Chapter');
         $chapter = $repo->find($data['id']);
-        $chapter->setTitle($data['title']);
-        $chapter->setPosition($data['position']);
+        $adapter = new ChapterAdapter($chapter);
+        $adapter->hydrate($data);
         $this->ema->persist($chapter);
         $this->ema->flush();
         return $response->withJson(['status' => 'ok']);

@@ -91,23 +91,12 @@ trait Dependencies
             return new \Org\Decatime\Middleware\PrivateFirewall($c->get('session'));
         };
 
-        $container['ctrl_base'] = function ($c) {
-            return [
-                'twig' => $c->get('twig'),
-                'logger' => $c->get('logger'),
-                'session' => $c->get('session'),
-                'ema' => $c->get('ema'),
-                'router' => $c->get('router'),
-                'imageManager' => $c->get('imageManager')
-            ];
-        };
-
         // controllers - BEGIN
         $container['MainController'] = function ($c) {
-            return new \Org\Decatime\Controller\MainController($c->get('ctrl_base'));
+            return new \Org\Decatime\Controller\MainController($c);
         };
         $container['PrivateController'] = function ($c) {
-            return new \Org\Decatime\Controller\PrivateController($c->get('ctrl_base'));
+            return new \Org\Decatime\Controller\PrivateController($c);
         };
         // controllers - END
     }
