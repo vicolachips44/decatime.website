@@ -76,13 +76,13 @@ function($, ko, Chapter) {
   };
 
   Article.prototype.constructor = Article;
-  Article.prototype.setActiveChapter = function (chapter) {
+  Article.prototype.setActiveChapter = function(chapter) {
     this.activeChapter = chapter;
     this.chapters().forEach(function(item) {
       item.isActive(item.id === chapter.id);
     });
   };
-  Article.prototype.setActiveContent = function (content) {
+  Article.prototype.setActiveContent = function(content) {
     this.activeContent = content;
     this.activeChapter.contents().forEach(function(item) {
       item.isActive(item.id === content.id);
@@ -105,9 +105,10 @@ function($, ko, Chapter) {
     }, 500);
   };
   Article.prototype.onBtnRemoveChapter = function(item) {
+    var title = item.activeChapter.title();
     this.typeOfOp = 'chapter';
     $('#dlg_title').html('Suppression de chapitre');
-    $('#dlg_content').html('Êtes vous sur de vouloir suprimer le chapitre <b>' + item.title() + '</b>');
+    $('#dlg_content').html('Êtes vous sur de vouloir suprimer le chapitre <b>' + title + '</b>');
     $('#decatime_dialog').modal();
 
   };

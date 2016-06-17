@@ -19,7 +19,7 @@ function($, ko, Article) {
       $('#article_item').modal('hide');
       _this.article.newItemTitle($('#article_item_value').val());
     });
-    $('#decatime_dialog').on('click', function() {
+    $('#dlg_confirm').on('click', function() {
       $('#decatime_dialog').modal('hide');
       _this.article.confirmOp();
     });

@@ -7,6 +7,7 @@ use Slim\Http\Response;
 use Monolog\Logger;
 
 use Org\Decatime\Adapter\ArticleAdapter;
+use Org\Decatime\Adapter\ChapterAdapter;
 use Org\Decatime\Entity\Article;
 use Org\Decatime\Entity\Chapter;
 

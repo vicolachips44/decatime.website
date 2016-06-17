@@ -35,11 +35,11 @@ function($, ko, Content) {
 
   Chapter.prototype.constructor = Chapter;
 
-  Chapter.prototype.onChapterClick = function (item) {
+  Chapter.prototype.onChapterClick = function(item) {
     this.article.setActiveChapter(item);
   };
 
-  Chapter.prototype.setActiveContent = function (content) {
+  Chapter.prototype.setActiveContent = function(content) {
     this.contents().forEach(function(item) {
       item.isActive(item.id === content.id);
     });
