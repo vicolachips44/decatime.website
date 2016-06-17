@@ -20,6 +20,17 @@ function($, ko, Content) {
       var isActive = contentObj.position === 1;
       _this.contents.push(new Content(contentObj, isActive, _this));
     });
+    if (this.isActive()) {
+      this.article.setActiveChapter(this);
+    }
+    this.title.subscribe(function() {
+      var postedData = ko.toJS(_this);
+      $.ajax({
+        url: $('#article_editor').data('ajax_update_chapter'),
+        type: 'POST',
+        data: { id: postedData.id, title: postedData.title, position: postedData.position }
+      });
+    });
   };
 
   Chapter.prototype.constructor = Chapter;

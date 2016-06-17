@@ -11,7 +11,9 @@
   class="container-fluid"
   id="article_editor"
   data-initial="{{ article }}"
-  data-ajax_save_chapter="{{ path_for('ajax_save_chapter') }}">
+  data-ajax_save_chapter="{{ path_for('ajax_save_chapter') }}"
+  data-ajax_delete_chapter="{{ path_for('ajax_delete_chapter') }}"
+  data-ajax_update_chapter="{{ path_for('ajax_update_chapter') }}">
   <div class="panel panel-default">
     <div class="panel-heading">
       Article
@@ -102,5 +104,6 @@
 {% block modal_dialogs %}
 {{ parent() }}
 {% include 'modal/add-item-title.html.twig' %}
+{% include 'modal/confirm-dialog.html.twig' %}
 {% endblock %}
 

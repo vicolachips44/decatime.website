@@ -30,27 +30,27 @@ class Chapter implements \JsonSerializable
 
     /**
      * contents of chapter
-     * @ORM\OneToMany(targetEntity="Content", mappedBy="chapter")
+     * @ORM\OneToMany(targetEntity="Content", mappedBy="chapter", cascade={"persist", "remove"})
      */
     private $contents;
 
     /**
      * child chapters
-     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="parent", cascade={"persist", "remove"})
      */
     private $chapters;
 
     /**
      * parent chapter
      * @ORM\ManyToOne(targetEntity="Chapter")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $parent;
 
     /**
      * parent article
      * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $article;
     /**

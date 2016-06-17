@@ -86,7 +86,6 @@ class MainController extends AbstractController
     public function ajaxSaveChapterAction(Request $request, Response $response)
     {
         if ($request->isXhr() === false) {
-            // bad request
             return $response->withStatus(400);
         }
 
@@ -103,6 +102,34 @@ class MainController extends AbstractController
         $this->ema->flush();
 
         return $response->withJson(['id' => $chapter->getId()]);
+    }
+
+    public function ajaxDeleteChapterAction(Request $request, Response $response)
+    {
+        if ($request->isXhr() === false) {
+            return $response->withStatus(400);
+        }
+        $data = $request->getParsedBody();
+        $repo = $this->ema->getRepository('Org\Decatime\Entity\Chapter');
+        $chapter = $repo->find($data['chapter_id']);
+        $this->ema->remove($chapter);
+        $this->ema->flush();
+        return $response->withJson(['status' => 'ok']);
+    }
+
+    public function ajaxUpdateChapterAction(Request $request, Response $response)
+    {
+        if ($request->isXhr() === false) {
+            return $response->withStatus(400);
+        }
+        $data = $request->getParsedBody();
+        $repo = $this->ema->getRepository('Org\Decatime\Entity\Chapter');
+        $chapter = $repo->find($data['id']);
+        $chapter->setTitle($data['title']);
+        $chapter->setPosition($data['position']);
+        $this->ema->persist($chapter);
+        $this->ema->flush();
+        return $response->withJson(['status' => 'ok']);
     }
 
     protected function articleEditorView(Article $article, Response $response)

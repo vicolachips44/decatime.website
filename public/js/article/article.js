@@ -22,9 +22,32 @@ function($, ko, Chapter) {
     });
   };
 
+  var _deleteActiveChapter = function(article) {
+    $.ajax({
+      url: $('#article_editor').data('ajax_delete_chapter'),
+      type: 'POST',
+      data: { chapter_id: article.activeChapter.id },
+      success: function() {
+        console.log('ok');
+        var position = article.activeChapter.position - 1;
+        article.chapters.remove(article.activeChapter);
+        article.activeChapter = null;
+        article.chapters().forEach(function(item) {
+          if (article.activeChapter !== null) {
+            return;
+          }
+          if (item.position <= position) {
+            article.setActiveChapter(item);
+          }
+        });
+      }
+    });
+  };
+
   var Article = function(data, $scope) {
     var _this = this;
     this.id = data.id;
+    this.activeChapter = null;
     this.title = ko.observable(data.title);
     this.shortDescription = ko.observable(data.shortDescription);
     this.smallImageSrc = data.smallImage === null ?
@@ -46,9 +69,8 @@ function($, ko, Chapter) {
       _this.chapters.push(new Chapter(objChapter, active, _this));
     });
 
-    this.activeChapter = null;
     this.activeContent = null;
-    this.typeOfAdd = '';
+    this.typeOfOp = null;
 
     ko.applyBindings(this, $scope);
   };
@@ -67,12 +89,13 @@ function($, ko, Chapter) {
     });
   };
   Article.prototype.newItemTitle = function(title) {
-    if (this.typeOfAdd === 'chapter') {
+    if (this.typeOfOp === 'chapter') {
       _saveChapter(title, this);
+      this.typeOfOp = null;
     }
   };
   Article.prototype.onBtnAddChapter = function() {
-    this.typeOfAdd = 'chapter';
+    this.typeOfOp = 'chapter';
     $('#article_item_value').val('');
     $('#article_item_title').html('Ajouter un titre de chapitre');
     $('#article_item').modal();
@@ -81,8 +104,18 @@ function($, ko, Chapter) {
       $('#article_item_value').focus();
     }, 500);
   };
-  Article.prototype.onBtnRemoveChapter = function() {
+  Article.prototype.onBtnRemoveChapter = function(item) {
+    this.typeOfOp = 'chapter';
+    $('#dlg_title').html('Suppression de chapitre');
+    $('#dlg_content').html('Êtes vous sur de vouloir suprimer le chapitre <b>' + item.title() + '</b>');
+    $('#decatime_dialog').modal();
 
+  };
+  Article.prototype.confirmOp = function() {
+    if (this.typeOfOp === 'chapter') {
+      _deleteActiveChapter(this);
+    }
+    this.typeOfOp = null;
   };
 
   return Article;

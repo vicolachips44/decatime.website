@@ -59,7 +59,7 @@ class Paragraph implements \JsonSerializable
     /**
      * Content of paragraph
      * @ORM\ManyToOne(targetEntity="Content", inversedBy="paragraphs")
-     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="content_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $content;
 

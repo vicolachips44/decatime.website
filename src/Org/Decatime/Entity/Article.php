@@ -57,13 +57,13 @@ class Article implements \JsonSerializable
 
     /**
      * child chapters
-     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="article", cascade={"persist", "remove"})
      */
     private $chapters;
 
     /**
      * article topics
-     * @ORM\OneToMany(targetEntity="ArticleTopic", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="ArticleTopic", mappedBy="article", cascade={"persist", "remove"})
      */
     private $articleTopics;
 

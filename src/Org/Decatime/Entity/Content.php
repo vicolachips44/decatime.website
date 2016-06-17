@@ -35,14 +35,14 @@ class Content implements \JsonSerializable
 
     /**
      * Contents of paragraph
-     * @ORM\OneToMany(targetEntity="Paragraph", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="Paragraph", mappedBy="content", cascade={"persist", "remove"})
      */
     private $paragraphs;
 
     /**
      * chapter of content
      * @ORM\ManyToOne(targetEntity="Chapter")
-     * @ORM\JoinColumn(name="chapter_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="chapter_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $chapter;
 
