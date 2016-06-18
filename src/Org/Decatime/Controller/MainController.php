@@ -21,7 +21,7 @@ class MainController extends AbstractController
     public function indexAction(Request $request, Response $response, array $args)
     {
         $this->logger->log(Logger::DEBUG, 'Ce message appraît dans le log et dans le web!');
-        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+        $repo = $this->ema->getRepository(self::R_ARTICLE);
 
         $articles = $repo->loadLatestArticles();
         return $this->render(
@@ -41,7 +41,7 @@ class MainController extends AbstractController
      */
     public function viewAction(Request $request, Response $response, array $args)
     {
-        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+        $repo = $this->ema->getRepository(self::R_ARTICLE);
 
         $article = $repo->loadArticle($args['id']);
 
@@ -62,7 +62,7 @@ class MainController extends AbstractController
 
     public function editAction(Request $request, Response $response, array $args)
     {
-        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+        $repo = $this->ema->getRepository(self::R_ARTICLE);
         $isNew = !isset($args['id']);
         if ($isNew && !$request->isPost()) {
             return $this->articleEditorView(new Article(), $response);
@@ -91,7 +91,7 @@ class MainController extends AbstractController
         }
 
         $data = $request->getParsedBody();
-        $repo = $this->ema->getRepository('Org\Decatime\Entity\Article');
+        $repo = $this->ema->getRepository(self::R_ARTICLE);
         $article = $repo->find($data['article_id']);
         $chapter = new Chapter();
         $adapter = new ChapterAdapter($chapter);
@@ -111,10 +111,16 @@ class MainController extends AbstractController
             return $response->withStatus(400);
         }
         $data = $request->getParsedBody();
-        $repo = $this->ema->getRepository('Org\Decatime\Entity\Chapter');
+        $repo = $this->ema->getRepository(self::R_CHAPTER);
         $chapter = $repo->find($data['id']);
+        $article_id = $chapter->getArticle()->getId();
+        $deletedPosition = $chapter->getPosition();
         $this->ema->remove($chapter);
         $this->ema->flush();
+
+        $this->ema->getRepository(self::R_ARTICLE)
+            ->reorderChapters($article_id, $deletedPosition);
+
         return $response->withJson(['status' => 'ok']);
     }
 
@@ -124,7 +130,7 @@ class MainController extends AbstractController
             return $response->withStatus(400);
         }
         $data = $request->getParsedBody();
-        $repo = $this->ema->getRepository('Org\Decatime\Entity\Chapter');
+        $repo = $this->ema->getRepository(self::R_CHAPTER);
         $chapter = $repo->find($data['id']);
         $adapter = new ChapterAdapter($chapter);
         $adapter->hydrate($data);

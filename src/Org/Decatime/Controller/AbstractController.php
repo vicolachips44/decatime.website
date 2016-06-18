@@ -10,6 +10,9 @@ use RKA\Session;
 
 abstract class AbstractController
 {
+    const R_ARTICLE = 'Org\Decatime\Entity\Article';
+    const R_CHAPTER = 'Org\Decatime\Entity\Chapter';
+
     protected $twig;
     protected $logger;
     protected $session;

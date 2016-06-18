@@ -10,6 +10,7 @@ final class App extends \Slim\App
         parent::__construct($this->loadSettings());
         $this->initDependencies();
         $this->initMiddlewares();
+        $this->initEmaEvents();
 
         Routes::getInstance()->load($this);
     }
@@ -34,5 +35,16 @@ final class App extends \Slim\App
     private function initMiddlewares()
     {
         $this->add('sessionMiddleware');
+    }
+
+    private function initEmaEvents()
+    {
+        $eventBus = $this->getContainer()->get('ema_events');
+        $eventBus->addEventListener(
+            [
+                \Doctrine\ORM\Events::postRemove
+            ],
+            new \Org\Decatime\Event\EntityListener()
+        );
     }
 }

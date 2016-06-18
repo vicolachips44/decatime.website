@@ -78,8 +78,16 @@ trait Dependencies
 
             $config->setMetadataDriverImpl($driver);
 
-            $ema = \Doctrine\ORM\EntityManager::create($settings['dbparams'], $config);
+            $ema = \Doctrine\ORM\EntityManager::create(
+                $settings['dbparams'],
+                $config,
+                $c->get('ema_events')
+            );
             return $ema;
+        };
+
+        $container['ema_events'] = function ($c) {
+            return new \Doctrine\Common\EventManager();
         };
 
         // image manager service

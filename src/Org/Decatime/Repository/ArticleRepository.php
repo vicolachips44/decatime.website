@@ -39,4 +39,21 @@ class ArticleRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    public function reorderChapters($article_id, $deletedPosition)
+    {
+        $article = $this->find($article_id);
+
+        $query = $this->getEntityManager()
+            ->createQuery('
+                UPDATE Org\Decatime\Entity\Chapter c
+                SET c.position = c.position - 1
+                WHERE c.article = :article
+                AND c.position > :position
+            ')
+            ->setParameter('article', $article)
+            ->setParameter('position', $deletedPosition);
+
+        return $query->execute();
+    }
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table
  */
-class Chapter implements \JsonSerializable
+class Chapter implements \JsonSerializable, Rankable
 {
     /**
      * @ORM\Id

@@ -28,18 +28,18 @@ function($, ko, Chapter) {
       type: 'POST',
       data: { id: article.activeChapter.id },
       success: function() {
-        console.log('ok');
-        var position = article.activeChapter.position - 1;
-        article.chapters.remove(article.activeChapter);
-        article.activeChapter = null;
+        var deletedPosition = article.activeChapter.position;
         article.chapters().forEach(function(item) {
-          if (article.activeChapter !== null) {
-            return;
-          }
-          if (item.position <= position) {
-            article.setActiveChapter(item);
+          if (item.position > deletedPosition) {
+            console.log('changing itm position of ' + item.title());
+            item.position = item.position - 1;
           }
         });
+        article.chapters.remove(article.activeChapter);
+        article.activeChapter = null;
+        if (article.chapters().length > -1) {
+          article.setActiveChapter(article.chapters()[0]);
+        }
       }
     });
   };
