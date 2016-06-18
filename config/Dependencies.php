@@ -99,6 +99,10 @@ trait Dependencies
             return new \Org\Decatime\Middleware\PrivateFirewall($c->get('session'));
         };
 
+        $container['xhr_only'] = function ($c) {
+            return new \Org\Decatime\Middleware\XhrOnly();
+        };
+
         // controllers - BEGIN
         $container['MainController'] = function ($c) {
             return new \Org\Decatime\Controller\MainController($c);

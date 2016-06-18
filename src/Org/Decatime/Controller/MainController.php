@@ -86,10 +86,6 @@ class MainController extends AbstractController
 
     public function ajaxSaveChapterAction(Request $request, Response $response)
     {
-        if ($request->isXhr() === false) {
-            return $response->withStatus(400);
-        }
-
         $data = $request->getParsedBody();
         $repo = $this->ema->getRepository(self::R_ARTICLE);
         $article = $repo->find($data['article_id']);
@@ -107,9 +103,6 @@ class MainController extends AbstractController
 
     public function ajaxDeleteChapterAction(Request $request, Response $response)
     {
-        if ($request->isXhr() === false) {
-            return $response->withStatus(400);
-        }
         $data = $request->getParsedBody();
         $repo = $this->ema->getRepository(self::R_CHAPTER);
         $chapter = $repo->find($data['id']);
@@ -126,9 +119,6 @@ class MainController extends AbstractController
 
     public function ajaxUpdateChapterAction(Request $request, Response $response)
     {
-        if ($request->isXhr() === false) {
-            return $response->withStatus(400);
-        }
         $data = $request->getParsedBody();
         $repo = $this->ema->getRepository(self::R_CHAPTER);
         $chapter = $repo->find($data['id']);

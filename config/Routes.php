@@ -46,14 +46,19 @@ final class Routes
         // save chapter
         $app->post('/articles/ajax-save-chapter', 'MainController:ajaxSaveChapterAction')
             ->add('privateFirewall')
+            ->add('xhr_only')
             ->setName('ajax_save_chapter');
 
+        // delete chapter
         $app->post('/articles/ajax-delete-chapter', 'MainController:ajaxDeleteChapterAction')
             ->add('privateFirewall')
+            ->add('xhr_only')
             ->setName('ajax_delete_chapter');
 
+        // update chapter
         $app->post('/articles/ajax-update-chapter', 'MainController:ajaxUpdateChapterAction')
             ->add('privateFirewall')
+            ->add('xhr_only')
             ->setName('ajax_update_chapter');
     }
 }
