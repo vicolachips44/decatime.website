@@ -2,9 +2,10 @@ define(
 [
   'jquery',
   'knockout',
-  'article/chapter'
+  'article/chapter',
+  'article/Content'
 ],
-function($, ko, Chapter) {
+function($, ko, Chapter, Content) {
 
   var _saveChapter = function(title, article) {
     var newChapter = Chapter.newItem(title, article.chapters().length + 1);
@@ -18,6 +19,20 @@ function($, ko, Chapter) {
         var chapter = new Chapter(newChapter, false, article);
         article.chapters.push(chapter);
         article.setActiveChapter(chapter);
+      }
+    });
+  };
+  var _saveContent = function(title, article) {
+    var newContent = Content.newItem(title, article.activeChapter.contents().length + 1);
+    $.ajax({
+      url: $('#article_editor').data('ajax_save_content'),
+      type: 'POST',
+      data: { content: newContent, chapter_id: article.activeChapter.id },
+      success: function(resp) {
+        newContent.id = resp.id;
+        var content = new Content(newContent, false, article);
+        article.activeChapter.contents.push(content);
+        article.setActiveContent(content);
       }
     });
   };
@@ -70,7 +85,7 @@ function($, ko, Chapter) {
     });
 
     this.activeContent = null;
-    this.typeOfOp = null;
+    console.log('typeofop has been setted to null from constructor...');
 
     ko.applyBindings(this, $scope);
   };
@@ -89,13 +104,20 @@ function($, ko, Chapter) {
     });
   };
   Article.prototype.newItemTitle = function(title) {
-    if (this.typeOfOp === 'chapter') {
+    console.log('new title provided', title);
+    console.log(this);
+    console.log('type of operation is', Article.typeOfOp);
+    if (Article.typeOfOp === 'chapter') {
       _saveChapter(title, this);
-      this.typeOfOp = null;
     }
+    if (Article.typeOfOp === 'content') {
+      _saveContent(title, this);
+    }
+    Article.typeOfOp = null;
+    console.log('type of op has been setted to null from newItemTitle func');
   };
   Article.prototype.onBtnAddChapter = function() {
-    this.typeOfOp = 'chapter';
+    Article.typeOfOp = 'chapter';
     $('#article_item_value').val('');
     $('#article_item_title').html('Ajouter un titre de chapitre');
     $('#article_item').modal();
@@ -106,18 +128,38 @@ function($, ko, Chapter) {
   };
   Article.prototype.onBtnRemoveChapter = function(item) {
     var title = item.activeChapter.title();
-    this.typeOfOp = 'chapter';
+    Article.typeOfOp = 'chapter';
     $('#dlg_title').html('Suppression de chapitre');
     $('#dlg_content').html('Êtes vous sur de vouloir suprimer le chapitre <b>' + title + '</b>');
     $('#decatime_dialog').modal();
+  };
+  Article.prototype.onBtnAddContent = function() {
+    Article.typeOfOp = 'content';
+    $('#article_item_value').val('');
+    $('#article_item_title').html('Ajouter un titre de contenu');
+    $('#article_item').modal();
 
+    setTimeout(function() {
+      $('#article_item_value').focus();
+    }, 500);
+    console.log('type of operation has been setted to', Article.typeOfOp);
+  };
+  Article.prototype.onBtnRemoveContent = function() {
+    console.log('remove content...');
   };
   Article.prototype.confirmOp = function() {
-    if (this.typeOfOp === 'chapter') {
+    console.log('type of operation for confirm is ', Article.typeOfOp);
+    if (Article.typeOfOp === 'chapter') {
       _deleteActiveChapter(this);
     }
-    this.typeOfOp = null;
+    if (Article.typeOfOp === 'content') {
+      console.log('confirm: delete content');
+    }
+    Article.typeOfOp = null;
+    console.log('type of op has been setted to null from confirmOp function');
   };
+
+  Article.typeOfOp = null;
 
   return Article;
 });

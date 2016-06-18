@@ -60,5 +60,11 @@ final class Routes
             ->add('privateFirewall')
             ->add('xhr_only')
             ->setName('ajax_update_chapter');
+
+        // save content
+        $app->post('/articles/ajax-save-content', 'MainController:ajaxSaveContentAction')
+            ->add('privateFirewall')
+            ->add('xhr_only')
+            ->setName('ajax_save_content');
     }
 }

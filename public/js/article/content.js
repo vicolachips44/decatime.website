@@ -26,5 +26,16 @@ function($, ko, Paragraph) {
     this.article.setActiveContent(this);
   };
 
+  // CLASSIFIER SCOPE METHODS
+  Content.newItem = function(title, pos) {
+    return {
+      id: null,
+      title: title,
+      position: pos,
+      keywords: '',
+      paragraphs: []
+    };
+  };
+
   return Content;
 });

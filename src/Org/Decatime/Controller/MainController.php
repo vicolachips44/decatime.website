@@ -8,8 +8,10 @@ use Monolog\Logger;
 
 use Org\Decatime\Adapter\ArticleAdapter;
 use Org\Decatime\Adapter\ChapterAdapter;
+use Org\Decatime\Adapter\ContentAdapter;
 use Org\Decatime\Entity\Article;
 use Org\Decatime\Entity\Chapter;
+use Org\Decatime\Entity\Content;
 
 class MainController extends AbstractController
 {
@@ -127,6 +129,23 @@ class MainController extends AbstractController
         $this->ema->persist($chapter);
         $this->ema->flush();
         return $response->withJson(['status' => 'ok']);
+    }
+
+    public function ajaxSaveContentAction(Request $request, Response $response)
+    {
+        $data = $request->getParsedBody();
+        $repo = $this->ema->getRepository(self::R_CHAPTER);
+        $chapter = $repo->find($data['chapter_id']);
+        $content = new Content();
+        $adapter = new ContentAdapter($content);
+        $adapter->hydrate($data['content']);
+        $chapter->addContent($content);
+        $content->setChapter($chapter);
+
+        $this->ema->persist($content);
+        $this->ema->flush();
+
+        return $response->withJson(['id' => $content->getId()]);
     }
 
     protected function articleEditorView(Article $article, Response $response)
