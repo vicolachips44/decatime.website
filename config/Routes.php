@@ -44,25 +44,25 @@ final class Routes
             ->setName('article_edit');
 
         // save chapter
-        $app->post('/articles/ajax-save-chapter', 'MainController:ajaxSaveChapterAction')
+        $app->post('/articles/ajax-save-chapter', 'ChapterController:saveAction')
             ->add('privateFirewall')
             ->add('xhr_only')
             ->setName('ajax_save_chapter');
 
         // delete chapter
-        $app->post('/articles/ajax-delete-chapter', 'MainController:ajaxDeleteChapterAction')
+        $app->post('/articles/ajax-delete-chapter', 'ChapterController:deleteAction')
             ->add('privateFirewall')
             ->add('xhr_only')
             ->setName('ajax_delete_chapter');
 
         // update chapter
-        $app->post('/articles/ajax-update-chapter', 'MainController:ajaxUpdateChapterAction')
+        $app->post('/articles/ajax-update-chapter', 'ChapterController:updateAction')
             ->add('privateFirewall')
             ->add('xhr_only')
             ->setName('ajax_update_chapter');
 
         // save content
-        $app->post('/articles/ajax-save-content', 'MainController:ajaxSaveContentAction')
+        $app->post('/articles/ajax-save-content', 'ContentController:saveAction')
             ->add('privateFirewall')
             ->add('xhr_only')
             ->setName('ajax_save_content');
