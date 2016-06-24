@@ -3,7 +3,7 @@ define(
   'jquery',
   'knockout',
   'article/chapter',
-  'article/Content'
+  'article/content'
 ],
 function($, ko, Chapter, Content) {
 
