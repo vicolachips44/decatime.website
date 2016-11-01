@@ -14,7 +14,12 @@ in *.env.example*
 + bower install
 + npm install
 + grunt
++ go to config and cp .env.example to **.env**
++ mkdir -p cache/twig
++ mkdir -p cache/phpSession
++ run: **sh bin/initdb**
 + ./bin/runserv
++ navigate to **http://localhost:8000**
 
 ### Database building
 If you don't change anything in .env configuration file then the default database is sqlite and is named: *dbsite.sdb3*.
@@ -25,9 +30,10 @@ To build it run command:
 ```
 
 This will actually:
-+ Drop the database if it exists
++ Drop the database if exists
 + Create the schema
 + Update entities
 + load fixtures
 
 > Fixtures are located in fixtures folder in the root folder.
+
