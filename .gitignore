@@ -13,3 +13,4 @@ dbsite.sdb3
 /_private/
 /data/
 !/data/.gitkeep
+/nbproject/private/

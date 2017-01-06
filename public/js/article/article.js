@@ -79,9 +79,8 @@ function($, ko, Chapter, Content) {
 
     this.chapters = ko.observableArray([]);
     data.chapters.forEach(function(chapter) {
-      var objChapter = JSON.parse(chapter);
-      var active = objChapter.position === 1;
-      _this.chapters.push(new Chapter(objChapter, active, _this));
+      var active = chapter.position === 1;
+      _this.chapters.push(new Chapter(chapter, active, _this));
     });
 
     this.activeContent = null;

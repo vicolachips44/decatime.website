@@ -240,11 +240,11 @@ class Chapter implements \JsonSerializable, Rankable
     {
         $acontents = [];
         foreach ($this->contents as $content) {
-            $acontents[] = json_encode($content);
+            $acontents[] = $content->jsonSerialize();
         }
         $achapters = [];
         foreach ($this->chapters as $chapter) {
-            $achapters[] = json_encode($chapter);
+            $achapters[] = $chapter->jsonErialize();
         }
         return [
             'id' => $this->id,

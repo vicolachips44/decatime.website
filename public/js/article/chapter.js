@@ -16,9 +16,8 @@ function($, ko, Content) {
     this.isActive = ko.observable(active);
 
     data.contents.forEach(function(content) {
-      var contentObj = JSON.parse(content);
-      var isActive = contentObj.position === 1;
-      _this.contents.push(new Content(contentObj, isActive, _this));
+      var isActive = content.position === 1;
+      _this.contents.push(new Content(content, isActive, _this));
     });
     if (this.isActive()) {
       this.article.setActiveChapter(this);

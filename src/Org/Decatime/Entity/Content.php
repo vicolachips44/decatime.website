@@ -198,7 +198,7 @@ class Content implements \JsonSerializable, Rankable
     {
         $aparagraphs = [];
         foreach ($this->paragraphs as $paragraph) {
-            $aparagraphs[] = json_encode($paragraph);
+            $aparagraphs[] = $paragraph->jsonSerialize();
         }
         return [
             'id' => $this->id,

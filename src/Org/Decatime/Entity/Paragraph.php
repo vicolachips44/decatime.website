@@ -257,8 +257,8 @@ class Paragraph implements \JsonSerializable, Rankable
             'data' => $this->data,
             'version' => $this->version,
             'position' => $this->position,
-            'type' => json_encode($this->type),
-            'format' => json_encode($this->format)
+            'type' => $this->type->jsonSerialize(),
+            'format' => $this->format->jsonSerialize()
         ];
     }
 }

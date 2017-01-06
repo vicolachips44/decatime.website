@@ -17,7 +17,7 @@ function($, ko, Paragraph) {
     this.isActive = ko.observable(active);
 
     data.paragraphs.forEach(function(paragraph) {
-      _this.paragraphs.push(new Paragraph(JSON.parse(paragraph)));
+      _this.paragraphs.push(new Paragraph(paragraph));
     });
   };
 

@@ -364,11 +364,11 @@ class Article implements \JsonSerializable
     {
         $atopics = [];
         foreach ($this->articleTopics as $articleTopic) {
-            $atopics[] = json_encode($articleTopic);
+            $atopics[] = $articleTopic->jsonSerialize();
         }
         $achapters = [];
         foreach ($this->chapters as $chapter) {
-            $achapters[] = json_encode($chapter);
+            $achapters[] = $chapter->jsonSerialize();
         }
         return [
             'id' => $this->id,
